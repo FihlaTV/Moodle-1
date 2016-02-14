@@ -16,7 +16,7 @@
 
 \section{Overall Design}
 
-Our overall design of the app would consist of three main activities. The first one would be the splash screen, which would be displayed for a fixed amount of time. The next activity is the main login page, where there are separate fields to login as a student or a teacher.\\
+Our overall design of the app would consist of three main activities. The first one would be the splash screen, which would be displayed for a fixed amount of time. The next activity is the main login page, where there are separate fields to login as a student or as a teacher. After the user logs in successfully, the main dashboard appears. It is designed differently for students and teachers, to give personalised experience.\\
 As per the requirements of the assignment,
 \begin{itemize}
 \item Different layouts~\cite{multiple_screen_sizes} have been made for tablet and mobile phone view for all the three activities.
@@ -27,7 +27,7 @@ As per the requirements of the assignment,
 
 \section{User Interface}
 %\begin{itemize}
-\subsection{Splash Screen} The files activity\_splash.xml and content\_splash.xml define the layout of the splash screen. It consists of a big image that contains the logo and name of the application. The images for phone view and tab view have been included in drawable folder. An animation~\cite{animations} has been applied on the app logo to make it grow and shrink. Below is the screen shot of the splash screen in tablet view. The layout for tab view is in layout-sw590dp folder.(This is picked when smallest width exceeds 590 dp)
+\subsection{Splash Screen} The files activity\_msplash.xml and content\_msplash.xml define the layout of the splash screen. It consists of a big image that contains the logo and name of the application. The images for phone view and tab view have been included in drawable folder. An animation~\cite{animations} has been applied on the app logo to make it grow and shrink. Below is the screen shot of the splash screen in tablet view. The layout for tab view is in layout-sw590dp folder.(This is automatically picked when smallest width exceeds 590 dp)
 
 % \begin{figure}[!ht]
 % 	\centering
@@ -35,19 +35,13 @@ As per the requirements of the assignment,
 %   \caption{ Splash Screen on Nexus 10(Landscape)}
 % \end{figure}
 
-% \subsection{Design Of Main Activity}
-% \begin{itemize}
-% \item The layout of main page has been defined by activity\_main.xml and content\_main.xml files in the layout folder. 
-% \item For tab view, the layout files are in layout-sw590dp folder. The application automatically picks the layout file in this folder, as soon as the smallest width available to the app exceeds 590dp.
-% \item The page consists of a total of five data fields, including team name and name \& entry numbers of team members to be filled in by the user to register his team.
-% \item The '+' Button~\cite{android_button_maker} has been included which on clicking shows the data fields for the name and entry number of the third member of the team.
-% \item The '-' Button has been included which on clicking hides the data fields for the name and entry number of the third member of the team. It is visible only when the '+' button is clicked.
-% \item The 'Register' Button handles the data entered on being clicked.
-% \item A text block for displaying the server response and the appropriate message has been placed above the register button.
+\subsection{Design Of LoginPage Activity}
+\begin{itemize}
+\item The layout of main login page has been defined by activity\_login\_page.xml and content\_login\_page.xml files in the layout folder. 
 
-% \end{itemize} 
+\end{itemize} 
 
-% \par\noindent The following are the screen shots of the main page on different orientations as well as screen sizes~\cite{figures_in_latex}:
+\par\noindent The following are the screen shots of the main page on different orientations as well as screen sizes~\cite{figures_in_latex}:
 
 % \begin{figure}
 % 	\centering
@@ -63,8 +57,9 @@ As per the requirements of the assignment,
 %     \label{n9p}
 % \end{figure}
 
-% \subsection{Final Screen}
-% It appears when the correct data has been successfully posted on the server.It displays the details of the team entered by the user. It also includes a 'Register another team' button, that takes the app back to the main page, so that the user can register another team if needed. Below is the screen shot of the final screen.
+\subsection{DashBoard - Student}
+It appears when the user has been logged in successfully, as a student. Below is the screen shot of the dashboard as it appears for a student.
+
 
 % \begin{figure}
 % 	\centering
@@ -73,27 +68,22 @@ As per the requirements of the assignment,
 %   \label{n5final}
 % \end{figure}
 
-% \section{Implementation Details}
-% \subsection{Splash Class}
-% \par\noindent This class contains the various auto-generated methods to initialize an activity.
-% \par\noindent A handler has been added to execute the method Run() of a runnable after the fixed time specified by a private variable, splash\_time.
-% \par\noindent The Run() method creates a new Intent to start the main activity.
+\subsection{DashBoard - Teacher}
+It appears when the user has been logged in successfully, as a teacher. Below is the screen shot of the dashboard as it appears for a teacher.
+
+\section{Implementation Details}
+\subsection{MSplash Class}
+\par\noindent This class contains the various auto-generated methods to initialize an activity.
+\par\noindent A handler has been added to execute the method Run() of a runnable after the fixed time specified by a private variable, splash\_time.
+\par\noindent The Run() method creates a new Intent to start the main activity.
 
 % \subsection{AppGlobal Class}
 % \par\noindent This class~\cite{android_app_object} has been made to make an object of the application, so as to create a global request queue for the volley push requests. The same queue is used to add requests each time the user clicks the Register button on Main Page.
 
-% \subsection{Check\_constraints Class}
-% \par\noindent This class has been made separately, to perform all the required checks on the validity of the data entered by the user in the main page of the application. It includes the following methods:
-% \begin{itemize}
-% \item\textbf{Boolean NAME} : It checks for the validity of Name being entered. Name containing only alphabets are allowed.
-% \item\textbf{Boolean EntryNo} : It checks for the validity of Entry Number being entered.Only those Entry Numbers in IIT Delhi format are valid.
-% \item\textbf{Boolean Diff\_EntryNo} : It checks if all the Entry Numbers being entered are different else returns false.
-% \end{itemize}
 
 
-
-% \subsection{Main Activity Class}
-% \par\noindent The main activity class handles the dynamics and events of the main page. The following methods have been included other than the standard methods:
+\subsection{LoginPage Class}
+\par\noindent The LoginPage class handles the dynamics and events of the main login page. The following methods have been included other than the standard methods:
 % \begin{itemize}
 % \item \textbf{Add} : This method handles the OnClick event of the '+' button on the main page. It changes the visibility of the name and entry number fields of the third member and the '-' button to Visible and its own visibility to Invisible.
 % \item \textbf{sub} : This method handles the OnClick event of the '-' button. It changes the visibility of the fields for details of the third member back to invisible.'+' button appears again.
@@ -135,12 +125,6 @@ As per the requirements of the assignment,
 % };
 % \end{lstlisting}
 
-
-% \section{Thread Interactions}
-% Initially, each of the thread controlling the balls are in active state and try to pick up the \texttt{mutex\_lock} by calling the updatefunction so as to modify the positions and velocity of the ball simulated by it. The threads are synchronized so that in each cycle the position and velocity of all the balls are updated i.e. in each cycle each of the thread gets the chance to pick up the lock and update the state of the ball which is simulated by it. This design is like a barrier method of communication. Once this is implemented correctly, we will attempt a one to one communication in which there will be no stored collection of the data of balls at one location.  
-
-% \section{Maintaining Variable Ball Speeds}
-% To maintain the variable ball speeds, we will keep the velocity of the ball in both directions as a parameter in the Ball class. This eliminates the need for changing the sleep time for different threads. We will provide a GUI interface for the user to pause the screen, select a particular ball and increase or decrease its speed based on the buttons clicked.
 
 
 % \section{Extra GUI Components}

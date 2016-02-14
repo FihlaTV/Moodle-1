@@ -4,6 +4,10 @@
 Adding animations.
 \newblock http://www.tutorialspoint.com/android/android\_animations.htm.
 
+\bibitem{figures_in_latex}
+Adding figures in latex.
+\newblock https://www.latex-tutorial.com/tutorials/beginners/latex-figures//.
+
 \bibitem{multiple_screen_sizes}
 Supporting tab and phone view.
 \newblock http://developer.android.com/training/multiscreen/screensizes.html.

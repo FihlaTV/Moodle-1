@@ -3,4 +3,5 @@ The style file: abbrv.bst
 Database file #1: references.bib
 Warning--to sort, need author or key in multiple_screen_sizes
 Warning--to sort, need author or key in animations
-(There were 2 warnings)
+Warning--to sort, need author or key in figures_in_latex
+(There were 3 warnings)
