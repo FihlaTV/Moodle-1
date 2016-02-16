@@ -12,8 +12,33 @@
     tools:context="nikhil.ayush.aditi.moodleana.MSplash"
     tools:showIn="@layout/activity_msplash">
 
+
     <!--<TextView-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:text="Hello World!" />-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Moodle-ANA"
+        android:id="@+id/Text"
+        android:layout_marginBottom="141dp"
+        android:textStyle="bold|italic"
+        android:textSize="32dp"
+        android:textColor="#bbbbbb"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:id="@+id/imageView"
+        android:layout_above="@+id/Text"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/IIT"/>
+
 </RelativeLayout>

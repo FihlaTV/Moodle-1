@@ -22,18 +22,7 @@
     <!--</android.support.design.widget.AppBarLayout>-->
 
     <include layout="@layout/content_msplash" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Moodle-ANA"
-        android:id="@+id/Text"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="152dp"
-        android:textStyle="bold|italic"
-        android:textSize="32dp"
-        android:textColor="#e2f4fa" />
+
     <!--<android.support.design.widget.FloatingActionButton-->
         <!--android:id="@+id/fab"-->
         <!--android:layout_width="wrap_content"-->
