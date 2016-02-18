@@ -1,6 +1,7 @@
 package nikhil.ayush.aditi.moodleana;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 
 
 
@@ -55,4 +57,14 @@ public class LoginPage extends AppCompatActivity {
     }
 
 
+    public void change(View view){
+        final EditText User = (EditText) findViewById(R.id.Username);
+        final EditText Pass = (EditText) findViewById(R.id.password);
+        String Username = User.getText().toString();
+        String Password = Pass.getText().toString();
+        Intent mainIntent = new Intent(this,Tab_view.class);
+        mainIntent.putExtra("User", Username);
+        mainIntent.putExtra("Pass", Password);
+        startActivity(mainIntent);
+    }
 }

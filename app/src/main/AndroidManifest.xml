@@ -25,7 +25,15 @@
         <activity
             android:name=".listPage"
             android:label="@string/title_activity_list_page"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Tab_view"
+            android:label="@string/title_activity_tab_view"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".CourseTab"
+            android:label="@string/title_activity_course_tab"
+            android:theme="@style/MyMaterialTheme"></activity>
     </application>
 
 </manifest>
