@@ -29,6 +29,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
@@ -102,34 +103,55 @@ public class LoginPage extends AppCompatActivity {
         String url = "http://10.208.20.164:8000/default/login.json?userid="+Username+"&password="+Password;
         String url1="http://10.208.20.164:8000/courses/list.json";
         final Intent mainIntent = new Intent(this, Tab_view.class);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i("yo", "why this ... working");
-                        System.out.println(response.toString());
-                        boolean b= J_object.login_res(response.toString());
-                       if(b) {
-                           message.setText("Success");
 
-        mainIntent.putExtra("User", Username);
-        mainIntent.putExtra("Pass", Password);
-        startActivity(mainIntent);
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                url, null, new Response.Listener<JSONObject>() {
 
-                       }
-                        else
-                           message.setText("faliure");
+            @Override
+            public void onResponse(JSONObject response) {
+                //Log.d(TAG, response.toString());
 
+                try {
+                    // Parsing json object response
+                    // response will be a json object
+                    boolean success = response.getBoolean("success");
+                  //  String email = response.getString("email");
+                    JSONObject user = response.getJSONObject("user");
+                    String entry = user.getString("entry_no");
+                    String email = user.getString("email");
+
+                    String jsonResponse = "";
+                    jsonResponse += "Name: " + entry + "\n\n";
+                    jsonResponse += "Email: " + email + "\n\n";
+                    if(success)
+                    {
+                        mainIntent.putExtra("User", Username);
+                        mainIntent.putExtra("Pass", Password);
+                        startActivity(mainIntent);
+                        message.setText(jsonResponse);
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("yo", "why this not working");
-                        Toast.makeText(LoginPage.this, error.toString(), Toast.LENGTH_LONG).show();
-                    }
-                });
-        Volley.newRequestQueue(this).add(stringRequest);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),
+                            "Error: " + e.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                }
+              //  hidepDialog();
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("Tag", "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_SHORT).show();
+                // hide the progress dialog
+               // hidepDialog();
+            }
+        });
+
+        Volley.newRequestQueue(this).add(jsonObjReq);
+
 
     }
 //10.192.55.191
@@ -144,14 +166,34 @@ public class LoginPage extends AppCompatActivity {
         final TextView message = (TextView) findViewById(R.id.message);
         String url = "http://10.208.20.164:8000/default/login.json?userid="+Username+"&password="+Password;
         String url1="http://10.208.20.164:8000/courses/list.json";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url1,
-                new Response.Listener<String>() {
+        JsonObjectRequest json_ob = new JsonObjectRequest (Request.Method.GET, url1,null,
+                new Response.Listener<JSONObject>()
+                {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(JSONObject response)
+                    {
                         Log.i("yo", "why this ... working");
-                        System.out.println(response.toString());
+///                        System.out.println(response.toString());
 
+                       try
+                       {
+                           int current_sem = response.getInt("current_sem");
+                           int current_year = response.getInt("current_year") ;
+                           JSONObject user = response.getJSONObject("user");
+                           JSONArray courses = response.getJSONArray("courses");
+                           System.out.println("sem :" +current_sem+" year: "+ current_year);
+                           String name = user.getString("first_name");
+                           for(int i=0;i<courses.length();i++)
+                           {    JSONObject course= courses.getJSONObject(i);
+                           }
 
+                       } catch (JSONException e)
+                       {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(),
+                        "Error: " + e.getMessage(),
+                        Toast.LENGTH_LONG).show();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -161,7 +203,7 @@ public class LoginPage extends AppCompatActivity {
                         Toast.makeText(LoginPage.this, error.toString(), Toast.LENGTH_LONG).show();
                     }
                 });
-        Volley.newRequestQueue(this).add(stringRequest);
+        Volley.newRequestQueue(this).add(json_ob);
       /*  Intent mainIntent = new Intent(this, Tab_view.class);
         mainIntent.putExtra("User", Username);
         mainIntent.putExtra("Pass", Password);
