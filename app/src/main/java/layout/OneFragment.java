@@ -31,10 +31,10 @@ public class OneFragment extends Fragment {
         Bundle bundle = this.getArguments();
         String Name1 = bundle.getString("User");
         String Name2 = bundle.getString("Pass");
-        final TextView Team  = (TextView) myFragmentView.findViewById(R.id.Name3);
+        /*final TextView Team  = (TextView) myFragmentView.findViewById(R.id.Name3);
         Team.setText(Name1);
         final TextView Team1  = (TextView) myFragmentView.findViewById(R.id.Name4);
-        Team1.setText(Name2);
+        Team1.setText(Name2);*/
 
         return myFragmentView;
     }
