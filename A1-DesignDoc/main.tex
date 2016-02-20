@@ -1,0 +1,159 @@
+\documentclass{article}
+\setlength{\topmargin}{-.3in}
+\setlength{\textheight}{9in}
+\setlength{\oddsidemargin}{.125in}
+\setlength{\textwidth}{6.25in}
+% \usepackage{titling}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage{graphicx}
+\begin{document}
+\title{COP290 - Moodle Android App: Design Document}
+% \posttitle{\par{COP 290: Design Practices in Computer Science\par}}
+\author{ Aditi(2014CS10205), Ayush Bhardwaj(2014CS10091), Nikhil Gupta(2014CS5140462)}
+
+\maketitle
+
+\section{Overall Design}
+
+Our overall design of the app would consist of three main activities. The first one would be the splash screen, which would be displayed for a fixed amount of time. The next activity is the main login page, where there are separate fields to login as a student or as a teacher. After the user logs in successfully, the main dashboard appears. It is designed differently for students and teachers, to give personalised experience.\\
+As per the requirements of the assignment,
+\begin{itemize}
+\item Different layouts~\cite{multiple_screen_sizes} have been made for tablet and mobile phone view for all the three activities.
+\item Different classes have been defined in separate files to maintain modularity in code.
+\item \textbf{Doxygen} has been implemented to create an HTML documentation of the application structure.
+\item Various resources, such as strings, images and styles, have been included in separate files.
+\end{itemize} 
+
+\section{User Interface}
+%\begin{itemize}
+\subsection{Splash Screen} The files activity\_msplash.xml and content\_msplash.xml define the layout of the splash screen. It consists of a big image that contains the logo and name of the application. The images for phone view and tab view have been included in drawable folder. An animation~\cite{animations} has been applied on the app logo to make it grow and shrink. Below is the screen shot of the splash screen in tablet view. The layout for tab view is in layout-sw590dp folder.(This is automatically picked when smallest width exceeds 590 dp)
+
+% \begin{figure}[!ht]
+% 	\centering
+%   \includegraphics[scale=0.8]{./N10-Splash.png}
+%   \caption{ Splash Screen on Nexus 10(Landscape)}
+% \end{figure}
+
+\subsection{Design Of LoginPage Activity}
+\begin{itemize}
+\item The layout of main login page has been defined by activity\_login\_page.xml and content\_login\_page.xml files in the layout folder. 
+
+\end{itemize} 
+
+\par\noindent The following are the screen shots of the main page on different orientations as well as screen sizes~\cite{figures_in_latex}:
+
+% \begin{figure}
+% 	\centering
+%   \includegraphics[scale=0.8]{N10-land.PNG}
+%   \caption{ Main Screen on Nexus 10(Landscape)}
+%   \label{n10main}
+% \end{figure}
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[scale=0.75]{N6.PNG}
+%     \caption{Main Screen on Nexus 6(Portrait)}
+%     \label{n9p}
+% \end{figure}
+
+\subsection{DashBoard - Student}
+It appears when the user has been logged in successfully, as a student. Below is the screen shot of the dashboard as it appears for a student.
+
+
+% \begin{figure}
+% 	\centering
+%   \includegraphics[scale=0.75]{N5-Final.PNG}
+%   \caption{ Final Screen on Nexus 5(Portrait)}
+%   \label{n5final}
+% \end{figure}
+
+\subsection{DashBoard - Teacher}
+It appears when the user has been logged in successfully, as a teacher. Below is the screen shot of the dashboard as it appears for a teacher.
+
+\section{Implementation Details}
+\subsection{MSplash Class}
+\par\noindent This class contains the various auto-generated methods to initialize an activity.
+\par\noindent A handler has been added to execute the method Run() of a runnable after the fixed time specified by a private variable, splash\_time.
+\par\noindent The Run() method creates a new Intent to start the main activity.
+
+% \subsection{AppGlobal Class}
+% \par\noindent This class~\cite{android_app_object} has been made to make an object of the application, so as to create a global request queue for the volley push requests. The same queue is used to add requests each time the user clicks the Register button on Main Page.
+
+
+
+\subsection{LoginPage Class}
+\par\noindent The LoginPage class handles the dynamics and events of the main login page. The following methods have been included other than the standard methods:
+% \begin{itemize}
+% \item \textbf{Add} : This method handles the OnClick event of the '+' button on the main page. It changes the visibility of the name and entry number fields of the third member and the '-' button to Visible and its own visibility to Invisible.
+% \item \textbf{sub} : This method handles the OnClick event of the '-' button. It changes the visibility of the fields for details of the third member back to invisible.'+' button appears again.
+% \item \textbf{SendData} : This is method to handle the OnClick event of the 'Register' button. It first uses an instance of the Check\_constraints class explained above, to check if the data entered is valid. Then, it initializes a new StringRequest object, a class in the module \textsc{volley} to send the data~\cite{volley_post_request} to the server. The request is added to a new Request Queue.
+% OnResponse and Error Listners are also handled via this StringRequest instance.
+% \item \textbf{fadein} : This method is used to implement an animation on certain text fields to slowly bring them into view.
+% \item \textbf{fadeout} : This method is used to implement an animation on certain text fields to slowly fade them out of view.
+% \item \textbf{pop} : This method is used to implement an animation on the error messages that appear on the screen.
+% \end{itemize}
+
+% \subsection{FinalScreen Class}
+% \par\noindent Along with the auto generated protected method onCreate it contains the following methods:
+% \begin{itemize}
+% \item\textbf{Register} : It handles the onClick event of the \'Register Another team button\' and directs back to the Main Screen.
+% \item\textbf{grow} : It starts the animation of the 'Congratulations' text. It is called in the onCreate method.
+% \end{itemize}
+% \subsection{Interaction Amongst Classes}
+
+% \begin{itemize}
+% \item \textbf{Splash Screen to MainPage} : An instance of the Intent Class is instantiated to start the MainActivity layout after a few seconds delay.
+% \item \textbf{Check\_constraints Object in MainPage}: Instance of Check\_constraints checks the validity of all the entered inputs one by one. Only if all the inputs are valid, StringRequest object is created and added to the request queue. Else an error message is displayed.
+% \item\textbf{Data to Final Screen} : Final Screen is only displayed when a successful response comes from the server. Flow of information from Main Screen to final screen takes place via Intent class object. This information is used to print the Team Details on the final screen.
+% \item\textbf{Final Screen to MainScreen} : An instance of the Intent Class is instantiated to start the MainActivity layout upon clicking the Register Another Team button.
+% \end{itemize}
+
+% \section{Testing}
+% \subsection{Individual Testing of Sub-Components}
+% Firstly, we would do the individual testing of the various sub-components using a class for testing functions.
+
+
+% \begin{lstlisting}[language=C++, caption={Class Parameters for Test}]
+% class Test
+% {
+% 	private:
+% 		bool verbose;               //Variable if test is to be conducted
+% 		std::string description;    //String description of the test
+% 		bool isPass;                //Boolean if the test has passed 
+% 		void PrintPassFail(bool);   //Prints the status of the test
+% };
+% \end{lstlisting}
+
+
+
+% \section{Extra GUI Components}
+% \begin{itemize}
+% \item Adding a GUI interface for the user to pause and play the screen.
+% \item Adding GUI buttons for the user to select a particular ball and modify its speed.
+% \item Adding GUI buttons to add a ball to the screen or remove a ball after selecting it.
+% \end{itemize}
+% \section{Error scenarios}
+% \begin{itemize}
+% \item \textbf{Team Name} The first check is on the team name. If it is an empty string then an error is displayed.
+% \item \textbf{Member names} The second check is on the names of the team members. If they are empty or contain any number, then a corresponding error is displayed.
+% \item \textbf{Entry Numbers} The third check is on the entry numbers. If any two are same or, they do not adhere to the format : 20nnxxnnnnn(n denotes number and x denotes alphabet), then a suitable error message is displayed.
+% \end{itemize}
+
+
+\section{Future endeavours}
+\begin{itemize}
+\item Keep local cache of changes done, at mobile level and sync them with the global server as soon as internet connectivity is supplied.
+\end{itemize}
+
+
+\section{Source Code}
+\par\noindent The source code of the project is maintained in the following repository:\\
+https://github.com/aditi741997/Moodle-ANA.git
+
+\bibliographystyle{abbrv}
+\medskip
+\bibliography{references}
+
+
+\end{document}

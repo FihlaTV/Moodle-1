@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">MoodleANA</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login_page">LoginPage</string>
+    <string name="title_activity_hello">hello</string>
+    <string name="title_activity_list_page">listPage</string>
+    <string name="title_activity_mainpage">mainpage</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_tab_view">Tab_view</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="one">View Courses</string>
+    <string name="two">View Grades</string>
+    <string name="three">View Notifications</string>
+    <string name="title_activity_course_tab">CourseTab</string>
+    <string name="overview">overview</string>
+    <string name="assignments">assignments</string>
+    <string name="grades">grades</string>
+    <string name="resources">resources</string>
+    <string name="threads">threads</string>
+</resources>
