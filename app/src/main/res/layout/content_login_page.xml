@@ -107,7 +107,27 @@
                 android:layout_height="50dp"
                 android:background="@drawable/buttonshape2"
                 android:textColor="#FFFFFF"
-                android:onClick="change" />
+                android:onClick="login" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/message"
+                android:layout_above="@+id/button"
+                android:layout_alignRight="@+id/Login"
+                android:layout_alignEnd="@+id/Login" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="list"
+                android:id="@+id/button2"
+                android:layout_alignTop="@+id/Login"
+                android:layout_toLeftOf="@+id/Login"
+                android:layout_toStartOf="@+id/Login"
+                android:onClick="login1"/>
         </RelativeLayout>
     </ScrollView>
 </android.support.v4.widget.DrawerLayout>
