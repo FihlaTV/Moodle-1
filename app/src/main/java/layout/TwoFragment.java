@@ -36,6 +36,8 @@ public class TwoFragment extends Fragment{
     public static List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
     MyApp_cookie app_list=new MyApp_cookie();
+    private long mRequestStartTime;
+
 
 
     public TwoFragment() {
@@ -54,19 +56,19 @@ public class TwoFragment extends Fragment{
         final JSONArray grades=new JSONArray();
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
-
+        mRequestStartTime = System.currentTimeMillis();
         String url1="http://10.208.20.164:8000/default/grades.json";
         JsonObjectRequest json_ob = new JsonObjectRequest (Request.Method.GET, url1,null,
                 new Response.Listener<JSONObject>()
                 {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
-                        Log.i("yo", "why this ... working");
+                public void onResponse(JSONObject response)
+                {
+                Log.i("yo", "why this ... working");
 ///                        System.out.println(response.toString());
 
-                        try
-                        {
+                 try
+                 {
 //                            int current_sem = response.getInt("current_sem");
 //                            int current_year = response.getInt("current_year") ;
 //                            JSONObject user = response.getJSONObject("user");
@@ -79,27 +81,27 @@ public class TwoFragment extends Fragment{
 //                                String name_course=course.getString("name") ;
 //                                app_list.course_list.put(id,name_course);
 //                                your_array_list.add(name_course);
-                            JSONArray grades= response.getJSONArray("grades");
-                            int i=0;
+                 JSONArray grades= response.getJSONArray("grades");
+                 int i=0;
 
-                            no_assign[0] =grades.length();
-                            for(;i<no_assign[0];i++)
-                            {   JSONObject grade_course=grades.getJSONObject(i);
-                                int cour_id=grade_course.getInt("registered_course_id");
-                                listDataHeader.add(app_list.course_code.get(cour_id)+" : "+ grade_course.getString("name"));//course code + Assignment name
-                                List<String> expand = new ArrayList<String>();
-                                float score=(float) grade_course.getInt("score");
-                                float weightage=(float) grade_course.getInt("weightage");
-                                float out_of =(float) grade_course.getInt("out_of");
-                                expand.add("Name:    "+grade_course.getString("name"));
-                                expand.add("Score:    "+Float.toString(score)+"/"+Float.toString(out_of));
-                                expand.add("Weightage:    "+Float.toString(weightage));
-                                expand.add("Absolute Marks:    "+Float.toString(score/out_of * weightage));
-
-                                listDataChild.put(app_list.course_code.get(cour_id)+" : "+ grade_course.getString("name"), expand);
-                                System.out.println("finallhfhfy"+app_list.course_code.get(cour_id)+" : "+ grade_course.getString("name"));
-                            }
-return;
+                 no_assign[0] =grades.length();
+                 for(;i<no_assign[0];i++)
+                 {   JSONObject grade_course=grades.getJSONObject(i);
+                     int cour_id=grade_course.getInt("registered_course_id");
+                     listDataHeader.add(app_list.course_code.get(cour_id)+" : "+ grade_course.getString("name"));//course code + Assignment name
+                     List<String> expand = new ArrayList<String>();
+                     float score=(float) grade_course.getInt("score");
+                     float weightage=(float) grade_course.getInt("weightage");
+                     float out_of =(float) grade_course.getInt("out_of");
+                     expand.add("Name:    "+grade_course.getString("name"));
+                     expand.add("Score:    "+Float.toString(score)+"/"+Float.toString(out_of));
+                     expand.add("Weightage:    "+Float.toString(weightage));
+                     expand.add("Absolute Marks:    "+Float.toString(score/out_of * weightage));
+                      listDataChild.put(app_list.course_code.get(cour_id)+" : "+ grade_course.getString("name"), expand);
+                     System.out.println("finallhfhfy"+app_list.course_code.get(cour_id)+" : "+ grade_course.getString("name"));
+                 }
+                     long totalRequestTime = System.currentTimeMillis() - mRequestStartTime;
+                     System.out.println("Response time for one is=="+ totalRequestTime );
 
 
 
@@ -124,7 +126,7 @@ return;
                 });
         Volley.newRequestQueue(getActivity().getApplicationContext()).add(json_ob);
         try {
-            Thread.sleep(4000);                 //1000 milliseconds is one second.
+            Thread.sleep(1000);                 //1000 milliseconds is one second.
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
@@ -158,7 +160,7 @@ return;
 //        comingSoon.add("The Spectacular Now");
 //        comingSoon.add("The Canyons");
 //        comingSoon.add("Europa Report");
-        System.out.println(listDataChild.size());
+        System.out.println("yo:"+listDataChild.size());
         System.out.println(listDataHeader.size());
 //        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
 //        listDataChild.put(listDataHeader.get(1), nowShowing);

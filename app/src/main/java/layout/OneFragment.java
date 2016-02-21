@@ -6,21 +6,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.content.Intent;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import nikhil.ayush.aditi.moodleana.CourseTab;
+import nikhil.ayush.aditi.moodleana.MyApp_cookie;
 import nikhil.ayush.aditi.moodleana.R;
+import nikhil.ayush.aditi.moodleana.dummy;
 
 import static android.location.Location.convert;
 
 
 public class OneFragment extends Fragment {
-
+    MyApp_cookie app_list=new MyApp_cookie();
     public OneFragment() {
         // Required empty public constructor
     }
@@ -40,25 +44,31 @@ public class OneFragment extends Fragment {
         String Name1 = bundle.getString("User");
         String Name2 = bundle.getString("Pass");
         ArrayList<String> list_all =bundle.getStringArrayList("String");
-        /*final TextView Team  = (TextView) myFragmentView.findViewById(R.id.Name3);
-        Team.setText(Name1);
-        final TextView Team1  = (TextView) myFragmentView.findViewById(R.id.Name4);
-        Team1.setText(Name2);*/
         ListView list=(ListView) myFragmentView.findViewById(R.id.listView) ;
-
-        //List<String> your_array_list = new ArrayList<String>();
-
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
                 (getActivity().getApplicationContext(),
                 android.R.layout.simple_list_item_1,
                          list_all
                 );
-System.out.println("yo boys");
+        System.out.println("yo boys");
         list.setAdapter(arrayAdapter);
-       // ArrayAdapter(, int textViewResourceId, List<T> objects)
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-    //super.onCreate(savedInstanceState);
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1,
+                                    int position, long arg3) {
+                // TODO Auto-generated method stub
 
+                //You could lookup by position, but "name" is more general)
+                Toast.makeText(getActivity().getApplication(),"position selcted is "+position,Toast.LENGTH_SHORT).show();
+                Intent coursePage=new Intent (getActivity().getApplicationContext(),CourseTab.class);
+                coursePage.putExtra("Course Code",app_list.course_code.get(position));
+                Intent intent = new Intent(getActivity(), CourseTab.class);
+                startActivity(intent);
+// all intents to be put here
+
+            }
+        });
         return myFragmentView;
     }
 

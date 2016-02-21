@@ -102,10 +102,11 @@ public class LoginPage extends AppCompatActivity {
         final TextView message = (TextView) findViewById(R.id.message);
         String url = "http://10.208.20.164:8000/default/login.json?userid="+Username+"&password="+Password;
         String url1="http://10.208.20.164:8000/courses/list.json";
+        String url_1="http://10.208.20.164:8000/default/login.json?userid=cs1110200&password=john";
         final Intent mainIntent = new Intent(this, Tab_view.class);
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                url, null, new Response.Listener<JSONObject>() {
+                url_1, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -125,10 +126,14 @@ public class LoginPage extends AppCompatActivity {
                     jsonResponse += "Email: " + email + "\n\n";
                     if(success)
                     {
-                        mainIntent.putExtra("User", Username);
-                        mainIntent.putExtra("Pass", Password);
+                    mainIntent.putExtra("User", Username);
+                    mainIntent.putExtra("Pass", Password);
+                        message.setText("Success");
+                    Toast.makeText(getApplicationContext(),"Loading",Toast.LENGTH_SHORT).show();
                         startActivity(mainIntent);
-                        message.setText(jsonResponse);
+
+
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -144,7 +149,7 @@ public class LoginPage extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("Tag", "Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_SHORT).show();
+                error.getMessage(), Toast.LENGTH_SHORT).show();
                 // hide the progress dialog
                // hidepDialog();
             }

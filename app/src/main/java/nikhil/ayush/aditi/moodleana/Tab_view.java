@@ -31,7 +31,7 @@ import layout.ThreeFragment;
 import layout.TwoFragment;
 
 public class Tab_view extends AppCompatActivity {
-
+    private long mRequestStartTime;
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -57,17 +57,16 @@ public class Tab_view extends AppCompatActivity {
         Username = registrationData.getString("User");
         String Password = registrationData.getString("Pass");
         setContentView(R.layout.activity_tab_view);
-
+        mRequestStartTime = System.currentTimeMillis();
         String url = "http://10.208.20.164:8000/default/login.json?userid="+Username+"&password="+Password;
         String url1="http://10.208.20.164:8000/courses/list.json";
         JsonObjectRequest json_ob = new JsonObjectRequest (Request.Method.GET, url1,null,
                 new Response.Listener<JSONObject>()
                 {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {
+                    public void onResponse(JSONObject response) {
                         Log.i("yo", "why this ... working");
-///                        System.out.println(response.toString());
+//                     System.out.println(response.toString());
 
                         try
                         {
@@ -86,7 +85,8 @@ public class Tab_view extends AppCompatActivity {
                                 your_array_list.add(name_course);
 
                             }
-
+                            long totalRequestTime = System.currentTimeMillis() - mRequestStartTime;
+                            System.out.println("Response time for one is=="+ totalRequestTime );
                         } catch (JSONException e)
                         {
                             e.printStackTrace();
@@ -106,8 +106,7 @@ public class Tab_view extends AppCompatActivity {
         Volley.newRequestQueue(this).add(json_ob);
 
 
-         Bundle bundle = new Bundle();
-
+        Bundle bundle = new Bundle();
         bundle.putString("User", Username);
         bundle.putString("Pass", Password);
         bundle.putStringArrayList("String", (ArrayList<String>) your_array_list);
@@ -117,7 +116,7 @@ public class Tab_view extends AppCompatActivity {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         String url2="http://10.208.20.164:8000/default/notifications.json" ;
         final List<String> noti_array_list = new ArrayList<String>();
-
+        mRequestStartTime = System.currentTimeMillis();
         JsonObjectRequest json_not = new JsonObjectRequest (Request.Method.GET, url2,null,
                 new Response.Listener<JSONObject>()
                 {
@@ -134,7 +133,8 @@ public class Tab_view extends AppCompatActivity {
                             {
                                 noti_array_list.add(noti.get(i).toString());
                             }
-
+                            long totalRequestTime = System.currentTimeMillis() - mRequestStartTime;
+                            System.out.println("Response time for three is=="+ totalRequestTime );
 
                         } catch (JSONException e)
                         {
@@ -153,6 +153,7 @@ public class Tab_view extends AppCompatActivity {
                     }
                 });
         Volley.newRequestQueue(this).add(json_not);
+        System.out.println("here");
         Bundle bundle3 = new Bundle();
 
         //bundle.putString("User", Username);
@@ -169,6 +170,7 @@ public class Tab_view extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
+        ///4 se c delayw2
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -179,6 +181,7 @@ public class Tab_view extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager)
     {//Defines the number pf tabs
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        System.out.println("Abt to delay");
         adapter.addFragment(One, Username);
         adapter.addFragment(new TwoFragment(), "Grades");
         adapter.addFragment(three, "Notifications");
@@ -186,6 +189,7 @@ public class Tab_view extends AppCompatActivity {
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter
+
      {  // provides fragments required from the view page
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
