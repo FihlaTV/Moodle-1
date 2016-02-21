@@ -99,7 +99,7 @@ public class TwoFragment extends Fragment{
                                 listDataChild.put(app_list.course_code.get(cour_id)+" : "+ grade_course.getString("name"), expand);
                                 System.out.println("finallhfhfy"+app_list.course_code.get(cour_id)+" : "+ grade_course.getString("name"));
                             }
-
+return;
 
 
 

@@ -40,6 +40,8 @@ public class Tab_view extends AppCompatActivity {
 //    final HashMap<Integer,String> hm =new HashMap<Integer,String>() ;
 
     OneFragment One = new OneFragment();
+    TwoFragment two =new TwoFragment();
+    ThreeFragment three =new ThreeFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +56,8 @@ public class Tab_view extends AppCompatActivity {
 
         Username = registrationData.getString("User");
         String Password = registrationData.getString("Pass");
-
         setContentView(R.layout.activity_tab_view);
+
         String url = "http://10.208.20.164:8000/default/login.json?userid="+Username+"&password="+Password;
         String url1="http://10.208.20.164:8000/courses/list.json";
         JsonObjectRequest json_ob = new JsonObjectRequest (Request.Method.GET, url1,null,
@@ -103,17 +105,62 @@ public class Tab_view extends AppCompatActivity {
                 });
         Volley.newRequestQueue(this).add(json_ob);
 
-        System.out.println(app_list.course_code.size());
-        System.out.println(app_list.course_list.size());
+
          Bundle bundle = new Bundle();
 
         bundle.putString("User", Username);
         bundle.putString("Pass", Password);
         bundle.putStringArrayList("String", (ArrayList<String>) your_array_list);
         One.setArguments(bundle);
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        String url2="http://10.208.20.164:8000/default/notifications.json" ;
+        final List<String> noti_array_list = new ArrayList<String>();
+
+        JsonObjectRequest json_not = new JsonObjectRequest (Request.Method.GET, url2,null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        Log.i("yo", "why this ... working");
+///                        System.out.println(response.toString());
+
+                        try
+                        {
+                            JSONArray noti=response.getJSONArray("notification");
+                            for(int i=0;i<noti.length();i++)
+                            {
+                                noti_array_list.add(noti.get(i).toString());
+                            }
 
 
+                        } catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(),
+                                    "Error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("yo", "why this not working");
+                        Toast.makeText(Tab_view.this, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        Volley.newRequestQueue(this).add(json_not);
+        Bundle bundle3 = new Bundle();
 
+        //bundle.putString("User", Username);
+        //bundle.putString("Pass", Password);
+        bundle3.putStringArrayList("noti", (ArrayList<String>) noti_array_list);
+        three.setArguments(bundle3);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -134,7 +181,7 @@ public class Tab_view extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(One, Username);
         adapter.addFragment(new TwoFragment(), "Grades");
-        adapter.addFragment(new ThreeFragment(), "Notifications");
+        adapter.addFragment(three, "Notifications");
         viewPager.setAdapter(adapter);
     }
 
