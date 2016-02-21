@@ -29,7 +29,6 @@ import layout.Course_Grades;
 import layout.Course_Overview;
 import layout.Course_Resources;
 import layout.Course_Threads;
-import nikhil.ayush.aditi.moodleana.R;
 
 public class CourseTab extends AppCompatActivity {
 
@@ -140,10 +139,62 @@ public class CourseTab extends AppCompatActivity {
         Bundle two =new Bundle();
         one.putStringArrayList("Name", (ArrayList<String>) Assignment_name);
         one.putStringArrayList("Created At", (ArrayList<String>) Assignment_created);
+
+
         Threads.setArguments(two);
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        final List<String> Name_assign=new ArrayList<String>();
+        final List<Integer> Assignment_Score=new ArrayList<Integer>();
+        //final List<Integer> Course_id=new ArrayList<Integer>();
+        final List<Integer> Out_of=new ArrayList<Integer>();
+        final List<Integer> Weightage=new ArrayList<Integer>();
+        JsonObjectRequest json_grade = new JsonObjectRequest (Request.Method.GET, url1,null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        Log.i("yo", "why this ... working");
+///                        System.out.println(response.toString());
 
+                        try
+                        {JSONArray grades=response.getJSONArray("grades");
+                            for(int i=0;i<grades.length();i++)
+                            {  Name_assign.add(grades.getJSONObject(i).getString("name"));
+                                int x =grades.getJSONObject(i).getInt("Score");
+                                float y=(float) x;
+                                Assignment_Score.add( x);
+                                Out_of.add(grades.getJSONObject(i).getInt("out_of"));
+                                Weightage.add(grades.getJSONObject(i).getInt("weightage"));
+
+                                //Assignment_update.add(assign.getJSONObject(i).getString("updated_on"));
+
+                            }
+//
+                        } catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(),
+                                    "Error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("yo", "why this not working");
+                        //  Toast.makeText(getActivity().getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        Volley.newRequestQueue(getApplicationContext()).add(json_thread);
+        Bundle three =new Bundle();
+        three.putStringArrayList("Name",(ArrayList<String>) Name_assign);
+        three.putIntegerArrayList("Score", (ArrayList<Integer>) Assignment_Score);
+        three.putIntegerArrayList("Out_of", (ArrayList<Integer>) Out_of);
+        three.putIntegerArrayList("Weightage",(ArrayList<Integer>) Weightage);
+        Grades.setArguments(three);
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
