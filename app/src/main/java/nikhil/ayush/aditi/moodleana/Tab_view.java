@@ -71,7 +71,7 @@ public class Tab_view extends AppCompatActivity {
                         try
                         {
                             int current_sem = response.getInt("current_sem");
-                            int current_year = response.getInt("current_year") ;
+                            int current_year = response.getInt("current_year");
                             JSONObject user = response.getJSONObject("user");
                             JSONArray courses = response.getJSONArray("courses");
                             System.out.println("sem :" +current_sem+" year: "+ current_year);
@@ -182,7 +182,7 @@ public class Tab_view extends AppCompatActivity {
     {//Defines the number pf tabs
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         System.out.println("Abt to delay");
-        adapter.addFragment(One, Username);
+        adapter.addFragment(One, "BLAH-BLAH-BLAH-BLAH-BLAH");
         adapter.addFragment(new TwoFragment(), "Grades");
         adapter.addFragment(three, "Notifications");
         viewPager.setAdapter(adapter);

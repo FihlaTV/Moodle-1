@@ -50,7 +50,7 @@ public class OneFragment extends Fragment {
                 android.R.layout.simple_list_item_1,
                          list_all
                 );
-        System.out.println("yo boys");
+        System.out.println("onCreate of OneFragment called");
         list.setAdapter(arrayAdapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -62,9 +62,10 @@ public class OneFragment extends Fragment {
                 //You could lookup by position, but "name" is more general)
                 Toast.makeText(getActivity().getApplication(),"position selcted is "+position,Toast.LENGTH_SHORT).show();
                 Intent coursePage=new Intent (getActivity().getApplicationContext(),CourseTab.class);
+                System.out.println("current position: " + position + " " + app_list.course_code.get(position));
                 coursePage.putExtra("Course Code",app_list.course_code.get(position));
-                Intent intent = new Intent(getActivity(), CourseTab.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), CourseTab.class);
+                startActivity(coursePage);
 // all intents to be put here
 
             }

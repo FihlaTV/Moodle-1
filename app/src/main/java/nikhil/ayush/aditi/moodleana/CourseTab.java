@@ -49,17 +49,18 @@ public class CourseTab extends AppCompatActivity {
         if(data == null) {
             return;
         }
-        int pos=data.getInt("Course Code");
-        String code=cookie.course_code.get(pos);
+        String code=data.getString("Course Code");
 
+        System.out.println("onCreate of CourseTab called, code:" + code);
 
-        setContentView(R.layout.activity_tab_view);
+        setContentView(R.layout.activity_course_tab);
         String url="http://10.208.20.164:8000/courses/course.json/"+code+"/assignments";
         String url1="http://10.208.20.164:8000/courses/course.json/"+code+"/grade";
+        String url2 = "http://10.208.20.164:8000/courses/course.json/"+code+"/threads";
         final List<String> Assignment_name=new ArrayList<String>();
         final List<String> Assignment_created=new ArrayList<String>();
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
-        JsonObjectRequest json_ob = new JsonObjectRequest (Request.Method.GET, url1,null,
+        JsonObjectRequest json_ob = new JsonObjectRequest (Request.Method.GET, url,null,
                 new Response.Listener<JSONObject>()
                 {
                     @Override
@@ -101,7 +102,7 @@ public class CourseTab extends AppCompatActivity {
         //////////////////////////////////////////////////////////////////////////////////////////////////////
         final List<String> Thread_title=new ArrayList<String>();
         final List<String> Thread_update=new ArrayList<String>();
-        JsonObjectRequest json_thread = new JsonObjectRequest (Request.Method.GET, url1,null,
+        JsonObjectRequest json_thread = new JsonObjectRequest (Request.Method.GET, url2,null,
                 new Response.Listener<JSONObject>()
                 {
                     @Override
@@ -196,6 +197,8 @@ public class CourseTab extends AppCompatActivity {
         three.putIntegerArrayList("Weightage",(ArrayList<Integer>) Weightage);
         Grades.setArguments(three);
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -210,17 +213,11 @@ public class CourseTab extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Course_Overview(), "Overview");
-        adapter.addFragment(new Course_Assignments(), "Assignments");
-        adapter.addFragment(new Course_Resources(), "Resources");
-        adapter.addFragment(new Course_Threads(), "Threads");
-        adapter.addFragment(new Course_Grades(), "Grades");
-//        adapter.addFragment(new Course_Grades(), "Grades");
-//        adapter.addFragment(new Course_Grades(), "Grades");
-//        adapter.addFragment(new Course_Assignments(), "Assignments");
-//        adapter.addFragment(new Course_Resources(), "Resources");
-//        adapter.addFragment(new Course_Assignments(), "Assignments");
-//        adapter.addFragment(new Course_Resources(), "Resources");
+        adapter.addFragment(Overview, "Overview");
+        adapter.addFragment(Assignments, "Assignments");
+        adapter.addFragment(Resources, "Resources");
+        adapter.addFragment(Threads, "Threads");
+        adapter.addFragment(Grades, "Grades");
         viewPager.setAdapter(adapter);
     }
 

@@ -36,7 +36,8 @@ public class Course_Assignments extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_course__assignments, container, false);
         ListView Assgt_lv = (ListView) view.findViewById(R.id.AssgtCustomList);
@@ -44,7 +45,8 @@ public class Course_Assignments extends Fragment{
         ArrayList<String> titles = bundle.getStringArrayList("Name");
         ArrayList<String> times = bundle.getStringArrayList("Created At");
 //         arraylist
-            Assgt_lv.setAdapter(new CustomListAdapter((CourseTab)getActivity(), titles, times));
+        CustomListAdapter new_adap = new CustomListAdapter((CourseTab)getActivity(), titles, times);
+            Assgt_lv.setAdapter(new_adap);
         return view;
     }
 
