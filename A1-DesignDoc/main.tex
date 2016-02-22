@@ -92,6 +92,28 @@ It is dividied into multiple tabs, as explained below:
 \par\noindent These classes are used to populate data in the fragments created in the CourseTab page.
 \subsubsection{Course\_Assignments}
 
+\subsubsection{CustomListAdapter}
+% \begin{itemize}
+\par\noindent This class has been made to implement a custom List View. It extends the BaseAdapter class, which basically handles the poplulation of data into the items of the ListView.
+\par\noindent \textbf{Fields} : It has the following fields:
+\begin{itemize}
+\item \textit{Titles} - This is the list of strings that populate the title text box of each custom list item.
+\item \textit{Times} - This is the list of the time of creation/latest update of a particular item in the list.
+\item \textit{Serial} - It is a list of serial numbers, denoting the order in which the items are displayed in the list.
+
+\item \textit{context} - It denotes the main application over which the fragments containing the custom list view are being inflated.
+
+\item \textit{inflater} - It is an object of type LayoutInflater.
+\end{itemize}
+
+\par\noindent \textbf{Methods} : The following methods,other than th econstructor have been defined in the class to implement the custom List adapter -
+\begin{itemize}
+\item \textbf{getCount()} - Returns the number of items in the ListView.
+\item \textbf{getItem(int)} - Returns the list view item corresponding to a particular position.
+\item \textbf{getItemId()} - Returns the position of a listView item.
+\item \textbf{getView(int,View,ViewGroup)} - Returns the inflated view of the 
+\end{itemize}
+
 \subsection{BackEnd Classes}
 \subsubsection{MSplash Class}
 \par\noindent This class contains the various auto-generated methods to initialize an activity.
