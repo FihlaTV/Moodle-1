@@ -99,8 +99,8 @@ public class CourseTab extends AppCompatActivity {
         one.putStringArrayList("Created At", (ArrayList<String>) Assignment_created);
         Assignments.setArguments(one);
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-        final List<String> Assignment_title=new ArrayList<String>();
-        final List<String> Assignment_update=new ArrayList<String>();
+        final List<String> Thread_title=new ArrayList<String>();
+        final List<String> Thread_update=new ArrayList<String>();
         JsonObjectRequest json_thread = new JsonObjectRequest (Request.Method.GET, url1,null,
                 new Response.Listener<JSONObject>()
                 {
@@ -114,8 +114,8 @@ public class CourseTab extends AppCompatActivity {
                         {JSONArray assign=response.getJSONArray("course_threads");
                             for(int i=0;i<assign.length();i++)
                             {
-                                Assignment_title.add(assign.getJSONObject(i).getString("name"));
-                                Assignment_update.add(assign.getJSONObject(i).getString("updated_on"));
+                                Thread_title.add(assign.getJSONObject(i).getString("name"));
+                                Thread_update.add(assign.getJSONObject(i).getString("updated_on"));
 
                             }
 //
@@ -137,8 +137,8 @@ public class CourseTab extends AppCompatActivity {
                 });
         Volley.newRequestQueue(getApplicationContext()).add(json_thread);
         Bundle two =new Bundle();
-        one.putStringArrayList("Name", (ArrayList<String>) Assignment_name);
-        one.putStringArrayList("Created At", (ArrayList<String>) Assignment_created);
+        two.putStringArrayList("Name", (ArrayList<String>) Thread_title);
+        two.putStringArrayList("Updated On", (ArrayList<String>) Thread_update);
 
 
         Threads.setArguments(two);

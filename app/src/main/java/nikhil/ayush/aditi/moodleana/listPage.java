@@ -18,7 +18,8 @@ public class listPage extends AppCompatActivity {
     ExpandableListView Exp_List;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
