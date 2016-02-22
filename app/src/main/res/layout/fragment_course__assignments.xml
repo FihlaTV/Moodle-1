@@ -4,16 +4,17 @@
     android:layout_height="match_parent"
     tools:context="layout.Course_Assignments">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/assignments"
-        android:textSize="40dp"
-        android:textStyle="bold" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/assignments"-->
+        <!--android:textSize="40dp"-->
+        <!--android:textStyle="bold" />-->
 
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_marginTop="40dp"
         android:id="@+id/AssgtCustomList"></ListView>
 
 </RelativeLayout>

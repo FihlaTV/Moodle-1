@@ -1,8 +1,14 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="layout.Course_Threads">
+    android:layout_height="fill_parent"
+    android:id="@+id/parent"
+    tools:context="layout.Course_Threads"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <TextView
         android:layout_width="wrap_content"
@@ -12,7 +18,7 @@
         android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="87dp"
+        android:layout_marginTop="48dp"
         android:id="@+id/textView" />
 
     <EditText
@@ -39,9 +45,18 @@
         android:layout_height="wrap_content"
         android:text="SUBMIT"
         android:id="@+id/button3"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
-        android:onClick="Post_thread" />
+        android:layout_centerHorizontal="true"
+        android:onClick="Post_thread"
+        android:layout_below="@+id/description"
+        android:layout_marginTop="20dp"
+/>
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/button3"
+        android:id="@+id/ThreadsLV"
+        android:layout_marginTop="16dp">
+    </ListView>
 
 </RelativeLayout>

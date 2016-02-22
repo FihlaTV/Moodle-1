@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class Course_Assignments extends Fragment{
 
-    ListView Alv;
+//    ListView Alv;
 //    Context context;
 //    CourseTab activity is the context for these fragments.
     public CourseTab activity = (CourseTab) getActivity();

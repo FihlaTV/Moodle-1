@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -24,6 +25,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import nikhil.ayush.aditi.moodleana.CourseTab;
 import nikhil.ayush.aditi.moodleana.R;
 
 
@@ -42,8 +44,19 @@ public class Course_Threads extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_course__threads, container, false);
+        View view = inflater.inflate(R.layout.fragment_course__threads, container, false);
+        ListView ThreadLV = (ListView) view.findViewById(R.id.ThreadsLV);
+        Bundle bundle = this.getArguments();
+        ArrayList<String> titles = bundle.getStringArrayList("Name");
+        ArrayList<String> times = bundle.getStringArrayList("Updated On");
+//         arraylist
+        CustomListAdapter new_adap = new CustomListAdapter((CourseTab)getActivity(), titles, times);
+        ThreadLV.setAdapter(new_adap);
+        return view;
     }
+
+
+
 
     public void Post_thread(View view)
     {

@@ -67,8 +67,8 @@ public class CustomListAdapter extends BaseAdapter
         View onerow;
         onerow = inflater.inflate(R.layout.customlistitem, parent, false);
         holder.sno = (TextView) onerow.findViewById(R.id.SerialNo);
-        holder.time = (TextView) onerow.findViewById(R.id.ATitle);
-        holder.title = (TextView) onerow.findViewById(R.id.Time);
+        holder.title = (TextView) onerow.findViewById(R.id.ATitle);
+        holder.time = (TextView) onerow.findViewById(R.id.Time);
         holder.sno.setText(String.valueOf(Serial.get(position)));
         holder.time.setText(Times.get(position));
         holder.title.setText(Titles.get(position));
