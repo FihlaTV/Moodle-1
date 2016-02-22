@@ -70,6 +70,7 @@ public class Tab_view extends AppCompatActivity {
 
                         try
                         {
+                            System.out.println("Tabview pe " + response);
                             int current_sem = response.getInt("current_sem");
                             int current_year = response.getInt("current_year");
                             JSONObject user = response.getJSONObject("user");
@@ -128,6 +129,7 @@ public class Tab_view extends AppCompatActivity {
 
                         try
                         {
+//                            no array named notification. :/
                             JSONArray noti=response.getJSONArray("notification");
                             for(int i=0;i<noti.length();i++)
                             {

@@ -62,8 +62,8 @@ public class OneFragment extends Fragment {
                 //You could lookup by position, but "name" is more general)
                 Toast.makeText(getActivity().getApplication(),"position selcted is "+position,Toast.LENGTH_SHORT).show();
                 Intent coursePage=new Intent (getActivity().getApplicationContext(),CourseTab.class);
-                System.out.println("current position: " + position + " " + app_list.course_code.get(position));
-                coursePage.putExtra("Course Code",app_list.course_code.get(position));
+                System.out.println("current position(onefragment): " + (position+1) + " " + app_list.course_code.get(position+1));
+                coursePage.putExtra("Course Code",app_list.course_code.get(position+1));
 //                Intent intent = new Intent(getActivity(), CourseTab.class);
                 startActivity(coursePage);
 // all intents to be put here

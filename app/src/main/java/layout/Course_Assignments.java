@@ -42,6 +42,7 @@ public class Course_Assignments extends Fragment{
         View view = inflater.inflate(R.layout.fragment_course__assignments, container, false);
         ListView Assgt_lv = (ListView) view.findViewById(R.id.AssgtCustomList);
         Bundle bundle = this.getArguments();
+        System.out.println("Recieved at Assgts: " + bundle);
         ArrayList<String> titles = bundle.getStringArrayList("Name");
         ArrayList<String> times = bundle.getStringArrayList("Created At");
 //         arraylist

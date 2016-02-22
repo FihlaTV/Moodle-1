@@ -30,6 +30,7 @@ public class CustomListAdapter extends BaseAdapter
         Titles = titlelist;
         context = c_Activity;
         Times = timelist;
+        Serial = new ArrayList<Integer>();
         for (int i = 0; i < titlelist.size(); i ++)
         {
             Serial.add(i, i+1);
@@ -68,7 +69,7 @@ public class CustomListAdapter extends BaseAdapter
         holder.sno = (TextView) onerow.findViewById(R.id.SerialNo);
         holder.time = (TextView) onerow.findViewById(R.id.ATitle);
         holder.title = (TextView) onerow.findViewById(R.id.Time);
-        holder.sno.setText(Serial.get(position));
+        holder.sno.setText(String.valueOf(Serial.get(position)));
         holder.time.setText(Times.get(position));
         holder.title.setText(Titles.get(position));
         onerow.setOnClickListener(new OnClickListener(){

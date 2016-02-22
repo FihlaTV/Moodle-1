@@ -113,10 +113,11 @@ public class CourseTab extends AppCompatActivity {
 
                         try
                         {JSONArray assign=response.getJSONArray("course_threads");
+//                            System.out.println("JSON for threads: " + assign);
                             for(int i=0;i<assign.length();i++)
                             {
-                                Thread_title.add(assign.getJSONObject(i).getString("name"));
-                                Thread_update.add(assign.getJSONObject(i).getString("updated_on"));
+                                Thread_title.add(assign.getJSONObject(i).getString("title"));
+                                Thread_update.add(assign.getJSONObject(i).getString("created_at"));
 
                             }
 //
