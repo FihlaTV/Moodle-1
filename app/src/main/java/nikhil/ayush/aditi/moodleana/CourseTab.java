@@ -59,66 +59,54 @@ public class CourseTab extends AppCompatActivity {
         String url2 = "http://10.208.20.164:8000/courses/course.json/"+code+"/threads";
         final List<String> Assignment_name=new ArrayList<String>();
         final List<String> Assignment_created=new ArrayList<String>();
+        final List<String> Assignment_Deadline=new ArrayList<String>();
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
         JsonObjectRequest json_ob = new JsonObjectRequest (Request.Method.GET, url,null,
-                new Response.Listener<JSONObject>()
+        new Response.Listener<JSONObject>()
+        {
+            @Override
+            public void onResponse(JSONObject response)
+            {Log.i("yo", "why this ... working");
+///                System.out.println(response.toString());
+                try
+                {JSONArray assign=response.getJSONArray("assignments");
+                    for(int i=0;i<assign.length();i++)
+                    {   Assignment_name.add(assign.getJSONObject(i).getString("name"));
+                        Assignment_created.add(assign.getJSONObject(i).getString("created_at"));
+                        Assignment_Deadline.add(assign.getJSONObject(i).getString("deadline"));
+                    }
+                    } catch (JSONException e)
                 {
-                    @Override
-                    public void onResponse(JSONObject response)
-                    {
-                        Log.i("yo", "why this ... working");
-///                        System.out.println(response.toString());
-
-                        try
-                        {JSONArray assign=response.getJSONArray("assignments");
-                            for(int i=0;i<assign.length();i++)
-                            {
-                                Assignment_name.add(assign.getJSONObject(i).getString("name"));
-                                Assignment_created.add(assign.getJSONObject(i).getString("created_at"));
-
-                            }
-//
-                        } catch (JSONException e)
-                        {
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(),
-                                    "Error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG).show();
-                        }
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("yo", "why this not working");
+                    public void onErrorResponse(VolleyError error)
+                    {Log.i("yo", "why this not working");
                         //  Toast.makeText(getActivity().getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
                     }
                 });
         Volley.newRequestQueue(getApplicationContext()).add(json_ob);
-        Bundle one =new Bundle();
-        one.putStringArrayList("Name", (ArrayList<String>) Assignment_name);
-        one.putStringArrayList("Created At", (ArrayList<String>) Assignment_created);
-        Assignments.setArguments(one);
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////
         final List<String> Thread_title=new ArrayList<String>();
         final List<String> Thread_update=new ArrayList<String>();
         JsonObjectRequest json_thread = new JsonObjectRequest (Request.Method.GET, url2,null,
                 new Response.Listener<JSONObject>()
-                {
-                    @Override
-                    public void onResponse(JSONObject response)
+                {@Override
+                 public void onResponse(JSONObject response)
                     {
-                        Log.i("yo", "why this ... working");
+                    Log.i("yo", "why this ... working");
 ///                        System.out.println(response.toString());
-
                         try
                         {JSONArray assign=response.getJSONArray("course_threads");
-//                            System.out.println("JSON for threads: " + assign);
-                            for(int i=0;i<assign.length();i++)
-                            {
-                                Thread_title.add(assign.getJSONObject(i).getString("title"));
-                                Thread_update.add(assign.getJSONObject(i).getString("created_at"));
-
+//                      System.out.println("JSON for threads: " + assign);
+                        for(int i=0;i<assign.length();i++)
+                            {Thread_title.add(assign.getJSONObject(i).getString("title"));
+                            Thread_update.add(assign.getJSONObject(i).getString("created_at"));
                             }
 //
                         } catch (JSONException e)
@@ -138,12 +126,7 @@ public class CourseTab extends AppCompatActivity {
                     }
                 });
         Volley.newRequestQueue(getApplicationContext()).add(json_thread);
-        Bundle two =new Bundle();
-        two.putStringArrayList("Name", (ArrayList<String>) Thread_title);
-        two.putStringArrayList("Updated On", (ArrayList<String>) Thread_update);
 
-
-        Threads.setArguments(two);
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
         final List<String> Name_assign=new ArrayList<String>();
@@ -190,16 +173,31 @@ public class CourseTab extends AppCompatActivity {
                         //  Toast.makeText(getActivity().getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
                     }
                 });
-        Volley.newRequestQueue(getApplicationContext()).add(json_thread);
+        Volley.newRequestQueue(getApplicationContext()).add(json_grade);
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        try {
+            Thread.sleep(4000);                 //1000 milliseconds is one second.
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        Bundle one =new Bundle();
+        one.putStringArrayList("Name", (ArrayList<String>) Assignment_name);
+        one.putStringArrayList("Created At", (ArrayList<String>) Assignment_created);
+        one.putStringArrayList("deadline",(ArrayList<String>) Assignment_Deadline);
+        Assignments.setArguments(one);
+        Bundle two =new Bundle();
+        two.putStringArrayList("Name", (ArrayList<String>) Thread_title);
+        two.putStringArrayList("Updated On", (ArrayList<String>) Thread_update);
+
+
+        Threads.setArguments(two);
         Bundle three =new Bundle();
         three.putStringArrayList("Name",(ArrayList<String>) Name_assign);
         three.putIntegerArrayList("Score", (ArrayList<Integer>) Assignment_Score);
         three.putIntegerArrayList("Out_of", (ArrayList<Integer>) Out_of);
-        three.putIntegerArrayList("Weightage",(ArrayList<Integer>) Weightage);
+        three.putIntegerArrayList("Weightage", (ArrayList<Integer>) Weightage);
         Grades.setArguments(three);
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

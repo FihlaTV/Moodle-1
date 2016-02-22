@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="nikhil.ayush.aditi.moodleana">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".MyApp_cookie"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".MyApp_cookie" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MSplash"
             android:label="@string/app_name"
@@ -34,12 +36,16 @@
         <activity
             android:name=".CourseTab"
             android:label="@string/title_activity_course_tab"
-            android:theme="@style/MyMaterialTheme"></activity>
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+            android:theme="@style/MyMaterialTheme" />
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".Assign_details"></activity>
     </application>
 
 </manifest>

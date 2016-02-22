@@ -69,18 +69,6 @@ public class TwoFragment extends Fragment{
 
                  try
                  {
-//                            int current_sem = response.getInt("current_sem");
-//                            int current_year = response.getInt("current_year") ;
-//                            JSONObject user = response.getJSONObject("user");
-//                            JSONArray courses = response.getJSONArray("courses");
-//                            System.out.println("sem :" +current_sem+" year: "+ current_year);
-//                            String name = user.getString("first_name");
-//                            for(int i=0;i<courses.length();i++)
-//                            {    JSONObject course= courses.getJSONObject(i);
-//                                int id = course.getInt("id");
-//                                String name_course=course.getString("name") ;
-//                                app_list.course_list.put(id,name_course);
-//                                your_array_list.add(name_course);
                  JSONArray grades= response.getJSONArray("grades");
                  int i=0;
 
@@ -131,35 +119,7 @@ public class TwoFragment extends Fragment{
             Thread.currentThread().interrupt();
         }
 
-        // Adding child data
-//        listDataHeader.add("Top 250");
-//        listDataHeader.add("Now Showing");
-//        listDataHeader.add("Coming Soon..");
-//
-//        // Adding child data
-//        List<String> top250 = new ArrayList<String>();
-//        top250.add("The Shawshank Redemption");
-//        top250.add("The Godfather");
-//        top250.add("The Godfather: Part II");
-//        top250.add("Pulp Fiction");
-//        top250.add("The Good, the Bad and the Ugly");
-//        top250.add("The Dark Knight");
-//        top250.add("12 Angry Men");
-//
-//        List<String> nowShowing = new ArrayList<String>();
-//        nowShowing.add("The Conjuring");
-//        nowShowing.add("Despicable Me 2");
-//        nowShowing.add("Turbo");
-//        nowShowing.add("Grown Ups 2");
-//        nowShowing.add("Red 2");
-//        nowShowing.add("The Wolverine");
-//
-//        List<String> comingSoon = new ArrayList<String>();
-//        comingSoon.add("2 Guns");
-//        comingSoon.add("The Smurfs 2");
-//        comingSoon.add("The Spectacular Now");
-//        comingSoon.add("The Canyons");
-//        comingSoon.add("Europa Report");
+
         System.out.println("yo:"+listDataChild.size());
         System.out.println(listDataHeader.size());
 //        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
