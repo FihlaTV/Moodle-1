@@ -27,7 +27,8 @@ As per the requirements of the assignment,
 
 \section{User Interface}
 %\begin{itemize}
-\subsection{Splash Screen} The files activity\_msplash.xml and content\_msplash.xml define the layout of the splash screen. It consists of a big image that contains the logo and name of the application. The images for phone view and tab view have been included in drawable folder. An animation~\cite{animations} has been applied on the app logo to make it grow and shrink. Below is the screen shot of the splash screen in tablet view. The layout for tab view is in layout-sw590dp folder.(This is automatically picked when smallest width exceeds 590 dp)
+\subsection{Splash Screen} The files activity\_msplash.xml and content\_msplash.xml define the layout of the splash screen. It consists of a big image that contains the logo and name of the application. An animation~\cite{animations} has been applied on the app logo to make it grow and shrink. Below is the screen shot of the splash screen in tablet view. 
+% The layout for tab view is in layout-sw590dp folder.(This is automatically picked when smallest width exceeds 590 dp)
 
 % \begin{figure}[!ht]
 % 	\centering
@@ -57,10 +58,27 @@ As per the requirements of the assignment,
 %     \label{n9p}
 % \end{figure}
 
-\subsection{DashBoard - Student}
-It appears when the user has been logged in successfully, as a student. Below is the screen shot of the dashboard as it appears for a student.
+\subsection{DashBoard (Tab\_view)}
+It appears when the user has been logged in successfully, as a student.
+It is dividied into multiple tabs, as explained below:
+\begin{itemize}
+\item \textbf{Overview}
+\item \textbf{Grades}
+\item \textbf{Courses} : The elements in the list of courses are clickable, and a new page(CourseTab) containing the details of the particular course opens up on clicking on a course.
+% \item \textbf{}
+\end{itemize}
+\par\noindent To make the navigation among various sections of the app easier, a \textbf{Navigation drawer} has also been included in the Tab\_view activity. It appears on clicking on the icon on the top left, or also by swiping to the right on the screen.
+ Below is the screen shot of the dashboard , with and without the navigation drawer.
 
-
+\subsection{Course Page (CourseTab)}
+\par\noindent This page appears on clicking on any course in the list on the dashboard. It contains a TabView, comprising of the five fragments, listed as follows:
+\begin{itemize}
+\item \textbf{Overview}
+\item \textbf{Assignments}
+\item \textbf{Grades}
+\item \textbf{Threads}
+\item \textbf{Resources}
+\end{itemize}
 % \begin{figure}
 % 	\centering
 %   \includegraphics[scale=0.75]{N5-Final.PNG}
@@ -68,11 +86,14 @@ It appears when the user has been logged in successfully, as a student. Below is
 %   \label{n5final}
 % \end{figure}
 
-\subsection{DashBoard - Teacher}
-It appears when the user has been logged in successfully, as a teacher. Below is the screen shot of the dashboard as it appears for a teacher.
-
 \section{Implementation Details}
-\subsection{MSplash Class}
+\par\noindent The application structure is divided into two parts, one set of classes to handle the view and events of the user interface, and the other set forms the back-end.
+\subsection{Layout Handling}
+\par\noindent These classes are used to populate data in the fragments created in the CourseTab page.
+\subsubsection{Course\_Assignments}
+
+\subsection{BackEnd Classes}
+\subsubsection{MSplash Class}
 \par\noindent This class contains the various auto-generated methods to initialize an activity.
 \par\noindent A handler has been added to execute the method Run() of a runnable after the fixed time specified by a private variable, splash\_time.
 \par\noindent The Run() method creates a new Intent to start the main activity.
@@ -82,17 +103,19 @@ It appears when the user has been logged in successfully, as a teacher. Below is
 
 
 
-\subsection{LoginPage Class}
+\subsubsection{LoginPage Class}
 \par\noindent The LoginPage class handles the dynamics and events of the main login page. The following methods have been included other than the standard methods:
-% \begin{itemize}
-% \item \textbf{Add} : This method handles the OnClick event of the '+' button on the main page. It changes the visibility of the name and entry number fields of the third member and the '-' button to Visible and its own visibility to Invisible.
-% \item \textbf{sub} : This method handles the OnClick event of the '-' button. It changes the visibility of the fields for details of the third member back to invisible.'+' button appears again.
-% \item \textbf{SendData} : This is method to handle the OnClick event of the 'Register' button. It first uses an instance of the Check\_constraints class explained above, to check if the data entered is valid. Then, it initializes a new StringRequest object, a class in the module \textsc{volley} to send the data~\cite{volley_post_request} to the server. The request is added to a new Request Queue.
-% OnResponse and Error Listners are also handled via this StringRequest instance.
-% \item \textbf{fadein} : This method is used to implement an animation on certain text fields to slowly bring them into view.
-% \item \textbf{fadeout} : This method is used to implement an animation on certain text fields to slowly fade them out of view.
-% \item \textbf{pop} : This method is used to implement an animation on the error messages that appear on the screen.
-% \end{itemize}
+\begin{itemize}
+ \item \textbf{grow1} : 
+ \item \textbf{grow2} : 
+ \item \textbf{login} : 
+ \item \textbf{login1} : 
+
+\end{itemize}
+\subsubsection{MyApp\_cookie}
+\par\noindent This class has been made to handle cookies.
+
+\subsubsection{}
 
 % \subsection{FinalScreen Class}
 % \par\noindent Along with the auto generated protected method onCreate it contains the following methods:

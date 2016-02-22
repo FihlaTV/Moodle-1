@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  15 FEB 2016 00:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.18)  22 FEB 2016 17:12
 entering extended mode
 **./main.tex
 (main.tex
@@ -340,7 +340,7 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 22.
 
-Overfull \hbox (7.76903pt too wide) in paragraph at lines 40--41
+Overfull \hbox (7.76903pt too wide) in paragraph at lines 41--42
 []\OT1/cmr/m/n/10 The lay-out of main lo-gin page has been de-fined by ac-tiv-i
 ty[]login[]page.xml and con-tent[]login[]page.xml
  []
@@ -348,13 +348,13 @@ ty[]login[]page.xml and con-tent[]login[]page.xml
 [1
 
 {C:/Users/jagdish/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-(main.bbl
+(main.bbl [2]
 Overfull \hbox (4.1023pt too wide) in paragraph at lines 12--14
 []\OT1/cmr/m/n/10 Supporting tab and phone view.  http://developer.android.com/
 training/multiscreen/screensizes.html. 
  []
 
-) [2] (main.aux) ) 
+) [3] (main.aux) ) 
 Here is how much of TeX's memory you used:
  1417 strings out of 493634
  17563 string characters out of 3143738
@@ -362,16 +362,16 @@ Here is how much of TeX's memory you used:
  4819 multiletter control sequences out of 15000+200000
  7895 words of font info for 28 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 25i,6n,19p,584b,187s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 25i,6n,19p,445b,187s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
 mbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pf
 b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Pro
 gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program File
 s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 
 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on main.pdf (2 pages, 86059 bytes).
+Output written on main.pdf (3 pages, 94730 bytes).
 PDF statistics:
- 33 PDF objects out of 1000 (max. 8388607)
+ 36 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
