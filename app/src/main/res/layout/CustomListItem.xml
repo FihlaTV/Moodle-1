@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="40dp"
-    android:orientation="horizontal"
-    android:weightSum="3.5">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
     <TextView
         android:id="@+id/SerialNo"
@@ -11,14 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="28dp"
         android:textColor="#00688B"
-        android:layout_weight="1.3"
+        android:layout_weight="1.6"
         android:textSize="18dp"
         android:text="SNo"
  />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="28dp"
+        android:layout_height="wrap_content"
+        android:maxLines="100"
         android:layout_gravity="center"
         android:layout_weight="0.9"
         android:textColor="#00688B"

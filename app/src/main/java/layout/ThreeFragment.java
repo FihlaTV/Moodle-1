@@ -14,6 +14,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import nikhil.ayush.aditi.moodleana.R;
+import layout.CustomAdapter_Thread;
+
 
 public class ThreeFragment extends Fragment{
     /** This class populates the Notifications Tab on the main page.**/

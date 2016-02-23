@@ -26,9 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import nikhil.ayush.aditi.moodleana.CourseTab;
+import layout.CustomAdapter_Thread;
 import nikhil.ayush.aditi.moodleana.R;
 import nikhil.ayush.aditi.moodleana.thread_detail;
 
