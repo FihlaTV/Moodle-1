@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import layout.CustomAdapter_Thread;
+
 
 public class Assign_details extends AppCompatActivity {
     public String description;
@@ -46,8 +51,6 @@ public class Assign_details extends AppCompatActivity {
                             JSONObject assgt = response.getJSONObject("assignment");
                             JSONObject registered = response.getJSONObject("registered");
                             JSONObject course = response.getJSONObject("course");
-                            JSONArray subm = response.
-                                    getJSONArray("submissions");
 //                            populate static fields.
                             String create_at = assgt.getString("created_at");
                             TextView as_Create = (TextView) findViewById(R.id.createAssgt);
@@ -63,6 +66,21 @@ public class Assign_details extends AppCompatActivity {
                             description=assgt.getString("description");
                             TextView details=(TextView) findViewById(R.id.details);
                             details.setText(Html.fromHtml(description));
+
+                            ArrayList<String> sub_name = new ArrayList<>();
+                            ArrayList<String> sub_time = new ArrayList<>();
+
+                            JSONArray subm = response.getJSONArray("submissions");
+                            System.out.println(subm);
+                            for (int i = 0; i < subm.length(); i ++)
+                            {
+                                JSONObject submit = subm.getJSONObject(i);
+//                                sub_name.add(submit.getString(""));
+//                                sub_time.add(submit.getString(""));
+                            }
+                            ListView submissions = (ListView) findViewById(R.id.sublist);
+                            CustomAdapter_Thread adap = new CustomAdapter_Thread(getApplicationContext(), sub_name, sub_time);
+                            submissions.setAdapter(adap);
 
                         }
                         catch (JSONException e)
