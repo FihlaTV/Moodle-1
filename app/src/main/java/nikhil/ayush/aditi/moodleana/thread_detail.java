@@ -84,20 +84,21 @@ public class thread_detail extends AppCompatActivity {
 
                             ArrayList<String> comment_text = new ArrayList<>();
                             ArrayList<String> comm_user = new ArrayList<>();
-                            List<String> x = (List<String>)response.get("times_readable");
-                            System.out.println(x);
+                            JSONArray arr=response.getJSONArray("times_readable");
+//                            List<String> x = (List<String>) response.get("times_readable");
+                            System.out.println(arr);
                             ArrayList<String> times_Read = new ArrayList<>();
 
 
                             for(int i=0;i<comments.length();i++)
                             {    JSONObject comment= comments.getJSONObject(i);
                                 JSONObject comment_user = comment_users.getJSONObject(i);
-                                String xtime = x.get(i);
+                               // String xtime = xy[i];
 //                                u have the user and comment details and time of post.
 //                                TODO : parse times_readable.
                                 comment_text.add(comment.getString("description"));
                                 comm_user.add(comment_user.getString("first_name") + " " + comment_user.getString("last_name"));
-                                times_Read.add(xtime);
+                                times_Read.add(arr.getString(i));
 
                             }
                             ListView comment_List = (ListView) findViewById(R.id.commentList);

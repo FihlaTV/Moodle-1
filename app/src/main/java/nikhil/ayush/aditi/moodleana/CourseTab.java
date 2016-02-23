@@ -59,7 +59,7 @@ public class CourseTab extends AppCompatActivity {
 
         setContentView(R.layout.activity_course_tab);
         String url="http://10.208.20.164:8000/courses/course.json/"+code+"/assignments";
-        String url1="http://10.208.20.164:8000/courses/course.json/"+code+"/grade";
+        String url1="http://10.208.20.164:8000/courses/course.json/"+code+"/grades";
         String url2 = "http://10.208.20.164:8000/courses/course.json/"+code+"/threads";
         final List<String> Assignment_name=new ArrayList<String>();
         final List<String> Assignment_created=new ArrayList<String>();
@@ -160,7 +160,7 @@ public class CourseTab extends AppCompatActivity {
                         {JSONArray grades=response.getJSONArray("grades");
                             for(int i=0;i<grades.length();i++)
                             {  Name_assign.add(grades.getJSONObject(i).getString("name"));
-                                int x =grades.getJSONObject(i).getInt("Score");
+                                int x =grades.getJSONObject(i).getInt("score");
                                 float y=(float) x;
                                 Assignment_Score.add( x);
                                 Out_of.add(grades.getJSONObject(i).getInt("out_of"));
@@ -177,7 +177,7 @@ public class CourseTab extends AppCompatActivity {
                                     "Error: " + e.getMessage(),
                                     Toast.LENGTH_LONG).show();
                         }
-                        b3=true;
+                        b3=true;System.out.println("bundle set oof");
                     }
                 },
                 new Response.ErrorListener() {
@@ -202,6 +202,15 @@ public class CourseTab extends AppCompatActivity {
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
+        int qq=1;
+//        while(!b3)
+//        { try {
+//            Thread.sleep(600);                 //1000 milliseconds is one second.
+//        } catch(InterruptedException ex) {
+//            Thread.currentThread().interrupt();
+//        }
+//            qq=1;
+//        }
        // }
 //        System.out.println("Runs now "+ (System.currentTimeMillis()-tme));
         Bundle one =new Bundle();
@@ -219,11 +228,12 @@ public class CourseTab extends AppCompatActivity {
         Threads.setArguments(two);
 
         Bundle three =new Bundle();
-        three.putStringArrayList("Name",(ArrayList<String>) Name_assign);
+        three.putStringArrayList("Name", (ArrayList<String>) Name_assign);
         three.putIntegerArrayList("Score", (ArrayList<Integer>) Assignment_Score);
         three.putIntegerArrayList("Out_of", (ArrayList<Integer>) Out_of);
         three.putIntegerArrayList("Weightage", (ArrayList<Integer>) Weightage);
         Grades.setArguments(three);
+        System.out.println("bundle setting");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

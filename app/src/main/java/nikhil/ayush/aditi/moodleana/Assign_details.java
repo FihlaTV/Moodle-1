@@ -2,6 +2,7 @@ package nikhil.ayush.aditi.moodleana;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,10 +19,11 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 public class Assign_details extends AppCompatActivity {
-
+    public String description;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_assign_details);
         Bundle data=getIntent().getExtras();
         if(data == null)
         {
@@ -30,6 +32,7 @@ public class Assign_details extends AppCompatActivity {
         int id = data.getInt("Assgt No");
         String assgt_det = "http://10.208.20.164:8000/courses/assignment.json/" + id;
 
+        setContentView(R.layout.activity_assign_details);
         JsonObjectRequest assgt_json = new JsonObjectRequest (Request.Method.GET, assgt_det,null,
                 new Response.Listener<JSONObject>()
                 {
@@ -57,8 +60,9 @@ public class Assign_details extends AppCompatActivity {
                             int latedays = assgt.getInt("late_days_allowed");
                             TextView late = (TextView) findViewById(R.id.latedays);
                             late.setText("" + latedays + " days");
-
-
+                            description=assgt.getString("description");
+                            TextView details=(TextView) findViewById(R.id.details);
+                            details.setText(Html.fromHtml(description));
 
                         }
                         catch (JSONException e)
@@ -79,6 +83,6 @@ public class Assign_details extends AppCompatActivity {
 
         Volley.newRequestQueue(this).add(assgt_json);
 
-        setContentView(R.layout.activity_assign_details);
+
     }
 }
