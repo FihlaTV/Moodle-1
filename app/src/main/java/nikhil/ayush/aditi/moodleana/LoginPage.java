@@ -79,6 +79,8 @@ public class LoginPage extends AppCompatActivity {
     }
 
     public void grow1(View view) {
+        /**
+         * Animation to grow the size of text in a textBox.**/
         TextView Username = (TextView) findViewById(R.id.user);
         Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.grow);
         Username.startAnimation(animation1);
@@ -92,7 +94,10 @@ public class LoginPage extends AppCompatActivity {
     }
 
 
-    public void login(View view) throws JSONException {
+    public void login(View view) throws JSONException
+    {
+        /** This method sends the details entered by the user to the server, and
+         * validates it according to the response from the server.**/
         final EditText User = (EditText) findViewById(R.id.Username);
         final EditText Pass = (EditText) findViewById(R.id.password);
         CookieManager manager = new CookieManager();
@@ -102,7 +107,7 @@ public class LoginPage extends AppCompatActivity {
         final TextView message = (TextView) findViewById(R.id.message);
         String url = "http://10.208.20.164:8000/default/login.json?userid="+Username+"&password="+Password;
         String url1="http://10.208.20.164:8000/courses/list.json";
-        String url_1="http://10.208.20.164:8000/default/login.json?userid=cs1110200&password=john";
+        String url_1="http://10.208.20.164:8000/default/login.json?userid=cs5110271&password=abhishek";
         final Intent mainIntent = new Intent(this, Tab_view.class);
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,

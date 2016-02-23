@@ -41,6 +41,10 @@ public class CourseTab extends AppCompatActivity {
     Course_Resources Resources =new Course_Resources();
     Course_Threads Threads =new Course_Threads();
     Course_Overview Overview =new Course_Overview();
+    public boolean b1=false;
+    public boolean b2=false;
+    public boolean b3=false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,7 @@ public class CourseTab extends AppCompatActivity {
         final List<String> Assignment_Deadline=new ArrayList<String>();
         final List<Integer> Assgt_No = new ArrayList<Integer>();
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
+        // for course assignamnets
         JsonObjectRequest json_ob = new JsonObjectRequest (Request.Method.GET, url,null,
         new Response.Listener<JSONObject>()
         {
@@ -76,13 +81,14 @@ public class CourseTab extends AppCompatActivity {
                         Assignment_created.add(assign.getJSONObject(i).getString("created_at"));
                         Assignment_Deadline.add(assign.getJSONObject(i).getString("deadline"));
                         Assgt_No.add(assign.getJSONObject(i).getInt("id"));
+                        b1=true;
                     }
                     } catch (JSONException e)
                 {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
-                    }
+                }
                 },
                 new Response.ErrorListener() {
                     @Override
@@ -94,6 +100,7 @@ public class CourseTab extends AppCompatActivity {
         Volley.newRequestQueue(getApplicationContext()).add(json_ob);
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////
+        // object for course threads
         final List<String> Thread_title=new ArrayList<String>();
         final List<String> Thread_update=new ArrayList<String>();
         final List<Integer> ThreadID = new ArrayList<Integer>();
@@ -120,6 +127,7 @@ public class CourseTab extends AppCompatActivity {
                                     "Error: " + e.getMessage(),
                                     Toast.LENGTH_LONG).show();
                         }
+                        b2=true;
                     }
                 },
                 new Response.ErrorListener() {
@@ -133,6 +141,7 @@ public class CourseTab extends AppCompatActivity {
 
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // object for course grades
         final List<String> Name_assign=new ArrayList<String>();
         final List<Integer> Assignment_Score=new ArrayList<Integer>();
         //final List<Integer> Course_id=new ArrayList<Integer>();
@@ -144,7 +153,7 @@ public class CourseTab extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response)
                     {
-                        Log.i("yo", "why this ... working");
+                        Log.i("yo", "why this ...grades..... working");
 ///                        System.out.println(response.toString());
 
                         try
@@ -168,6 +177,7 @@ public class CourseTab extends AppCompatActivity {
                                     "Error: " + e.getMessage(),
                                     Toast.LENGTH_LONG).show();
                         }
+                        b3=true;
                     }
                 },
                 new Response.ErrorListener() {
@@ -180,32 +190,41 @@ public class CourseTab extends AppCompatActivity {
         Volley.newRequestQueue(getApplicationContext()).add(json_grade);
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
-        try {
-            Thread.sleep(4000);                 //1000 milliseconds is one second.
+//        try {
+//            Thread.sleep(4500);                 //1000 milliseconds is one second.
+//        } catch(InterruptedException ex) {
+//            Thread.currentThread().interrupt();
+//        }
+        float tme=System.currentTimeMillis();
+        //while(!(b1&&b2&&b3))
+         try {
+            Thread.sleep(7500);                 //1000 milliseconds is one second.
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
+       // }
+//        System.out.println("Runs now "+ (System.currentTimeMillis()-tme));
         Bundle one =new Bundle();
         one.putStringArrayList("Name", (ArrayList<String>) Assignment_name);
         one.putStringArrayList("Created At", (ArrayList<String>) Assignment_created);
         one.putStringArrayList("deadline", (ArrayList<String>) Assignment_Deadline);
         one.putIntegerArrayList("A_ID", (ArrayList<Integer>) Assgt_No);
-
         Assignments.setArguments(one);
+
         Bundle two =new Bundle();
         two.putStringArrayList("Name", (ArrayList<String>) Thread_title);
         two.putStringArrayList("Updated On", (ArrayList<String>) Thread_update);
         two.putIntegerArrayList("ID", (ArrayList<Integer>) ThreadID);
         two.putString("Course Code", code);
-
-
         Threads.setArguments(two);
+
         Bundle three =new Bundle();
         three.putStringArrayList("Name",(ArrayList<String>) Name_assign);
         three.putIntegerArrayList("Score", (ArrayList<Integer>) Assignment_Score);
         three.putIntegerArrayList("Out_of", (ArrayList<Integer>) Out_of);
         three.putIntegerArrayList("Weightage", (ArrayList<Integer>) Weightage);
         Grades.setArguments(three);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

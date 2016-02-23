@@ -55,7 +55,7 @@ String coursecode;
         ArrayList<String> times = bundle.getStringArrayList("Updated On");
 //         arraylist
        final ArrayList<Integer> ids = bundle.getIntegerArrayList("ID");
-        CustomAdapter_Thread new_adap = new CustomAdapter_Thread((CourseTab)getActivity(), titles, times);
+        CustomAdapter_Thread new_adap = new CustomAdapter_Thread(getActivity().getApplicationContext(), titles, times);
         ThreadLV.setAdapter(new_adap);
         ThreadLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

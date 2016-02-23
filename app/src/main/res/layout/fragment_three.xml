@@ -8,9 +8,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/three"
-        android:textSize="40dp"
+        android:textSize="36dp"
         android:textStyle="bold"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
         android:id="@+id/three" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/notif_list"
+        android:layout_below="@+id/three"
+        android:paddingRight="6dp"
+        android:paddingLeft="6dp"
+        android:layout_marginTop="20dp"></ListView>
 
 </RelativeLayout>

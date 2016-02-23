@@ -20,6 +20,8 @@ import java.util.ArrayList;
 //this one is for list of threads in Course_threads fragment.
 public class CustomAdapter_Thread extends BaseAdapter
 {
+    /** This class is a custom adapter to populate a ListView with user-defined layout of a list item.
+      **/
     ArrayList<String> Titles;
     ArrayList<String> Times;
     Context context;
@@ -27,8 +29,10 @@ public class CustomAdapter_Thread extends BaseAdapter
 
     private static LayoutInflater inflater = null;
 
-    public CustomAdapter_Thread(CourseTab c_Activity, ArrayList<String> titlelist, ArrayList<String> timelist)
+    public CustomAdapter_Thread(Context c_Activity, ArrayList<String> titlelist, ArrayList<String> timelist)
     {
+        /** The constructor takes two arrays as input, one is the list of titles, and the other is the list of times.
+         * They populate the second and the third text boxes respectively in the list items. **/
         Titles = titlelist;
         context = c_Activity;
         Times = timelist;
@@ -57,6 +61,7 @@ public class CustomAdapter_Thread extends BaseAdapter
 
     public class Holder
     {
+        /** This class is just to hold all the data corresponding to one list item together. **/
         TextView sno;
         TextView title;
         TextView time;
@@ -65,6 +70,7 @@ public class CustomAdapter_Thread extends BaseAdapter
 
     public  View getView(final int position, View convertView, ViewGroup parent)
     {
+        /** This method actually sets the text of the TextViews in the layout of list item, as defined in the file customlistitem.xml **/
         Holder holder = new Holder();
         View onerow;
         onerow = inflater.inflate(R.layout.customlistitem, parent, false);

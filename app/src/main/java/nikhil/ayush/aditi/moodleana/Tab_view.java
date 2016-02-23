@@ -64,11 +64,10 @@ public class Tab_view extends AppCompatActivity {
                 new Response.Listener<JSONObject>()
                 {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        Log.i("yo", "why this ... working");
-//                     System.out.println(response.toString());
-
-                        try
+                    public void onResponse(JSONObject response)
+                    {Log.i("yo", "why this ... working");
+//                    System.out.println(response.toString());
+                    try
                         {
 //                            System.out.println("Tabview pe " + response);
                             int current_sem = response.getInt("current_sem");
@@ -84,7 +83,6 @@ public class Tab_view extends AppCompatActivity {
                                 app_list.course_list.put(id,name_course);
                                 app_list.course_code.put(id,course.getString("code"));
                                 your_array_list.add(name_course);
-
                             }
                             long totalRequestTime = System.currentTimeMillis() - mRequestStartTime;
                             System.out.println("Response time for one is=="+ totalRequestTime );
@@ -101,22 +99,19 @@ public class Tab_view extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i("yo", "why this not working");
-                        Toast.makeText(Tab_view.this, error.toString(), Toast.LENGTH_LONG).show();
+                       Toast.makeText(Tab_view.this, error.toString(), Toast.LENGTH_LONG).show();
                     }
                 });
         Volley.newRequestQueue(this).add(json_ob);
-
-
         Bundle bundle = new Bundle();
         bundle.putString("User", Username);
         bundle.putString("Pass", Password);
         bundle.putStringArrayList("String", (ArrayList<String>) your_array_list);
         One.setArguments(bundle);
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////////
         String url2="http://10.208.20.164:8000/default/notifications.json" ;
-        final List<String> noti_array_list = new ArrayList<String>();
+        final List<String> noti_text = new ArrayList<String>();
+        final List<String> noti_time = new ArrayList<String>();
         mRequestStartTime = System.currentTimeMillis();
         JsonObjectRequest json_not = new JsonObjectRequest (Request.Method.GET, url2,null,
                 new Response.Listener<JSONObject>()
@@ -130,10 +125,14 @@ public class Tab_view extends AppCompatActivity {
                         try
                         {
 //                            no array named notification. :/
-                            JSONArray noti=response.getJSONArray("notification");
+                            JSONArray noti=response.getJSONArray("notifications");
                             for(int i=0;i<noti.length();i++)
                             {
-                                noti_array_list.add(noti.get(i).toString());
+
+                                noti_text.add(noti.getJSONObject(i).getString("description"));
+// TODO: change this description, thread id & course code is clickable.
+                                noti_time.add(noti.getJSONObject(i).getString("created_at"));
+//                                TODO: current - created at.
                             }
                             long totalRequestTime = System.currentTimeMillis() - mRequestStartTime;
                             System.out.println("Response time for three is=="+ totalRequestTime );
@@ -151,7 +150,7 @@ public class Tab_view extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i("yo", "why this not working");
-                        Toast.makeText(Tab_view.this, error.toString(), Toast.LENGTH_LONG).show();
+                 //       Toast.makeText(Tab_view.this, error.toString(), Toast.LENGTH_LONG).show();
                     }
                 });
         Volley.newRequestQueue(this).add(json_not);
@@ -160,7 +159,8 @@ public class Tab_view extends AppCompatActivity {
 
         //bundle.putString("User", Username);
         //bundle.putString("Pass", Password);
-        bundle3.putStringArrayList("noti", (ArrayList<String>) noti_array_list);
+        bundle3.putStringArrayList("noti_text", (ArrayList<String>) noti_text);
+        bundle3.putStringArrayList("noti_time", (ArrayList<String>) noti_time);
         three.setArguments(bundle3);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

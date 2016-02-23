@@ -68,11 +68,11 @@ public class thread_detail extends AppCompatActivity {
 
                             String create = thread.getString("created_at");
                             TextView createview = (TextView) findViewById(R.id.create);
-                            createview.setText(create);
+                            createview.setText("Created At " + create);
 
                             String update = thread.getString("updated_at");
                             TextView updateview = (TextView) findViewById(R.id.update);
-                            updateview.setText(update);
+                            updateview.setText("Updated At: " + update);
 
                             String desc = thread.getString("description");
                             TextView desc_view = (TextView) findViewById(R.id.desc);
@@ -84,7 +84,7 @@ public class thread_detail extends AppCompatActivity {
 
                             ArrayList<String> comment_text = new ArrayList<>();
                             ArrayList<String> comm_user = new ArrayList<>();
-                            JSONArray x = (JSONArray)response.get("times_readable");
+                            List<String> x = (List<String>)response.get("times_readable");
                             System.out.println(x);
                             ArrayList<String> times_Read = new ArrayList<>();
 
@@ -92,11 +92,12 @@ public class thread_detail extends AppCompatActivity {
                             for(int i=0;i<comments.length();i++)
                             {    JSONObject comment= comments.getJSONObject(i);
                                 JSONObject comment_user = comment_users.getJSONObject(i);
-                                JSONObject xtime = x.getJSONObject(i);
+                                String xtime = x.get(i);
 //                                u have the user and comment details and time of post.
+//                                TODO : parse times_readable.
                                 comment_text.add(comment.getString("description"));
                                 comm_user.add(comment_user.getString("first_name") + " " + comment_user.getString("last_name"));
-                                times_Read.add(xtime.getString(""));
+                                times_Read.add(xtime);
 
                             }
                             ListView comment_List = (ListView) findViewById(R.id.commentList);

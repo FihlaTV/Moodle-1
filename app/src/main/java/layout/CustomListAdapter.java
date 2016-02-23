@@ -30,6 +30,8 @@ public class CustomListAdapter extends BaseAdapter
 
     public CustomListAdapter(Context c_Activity, ArrayList<String> textlist, ArrayList<String> timelist, ArrayList<String> userlist)
     {
+        /** The constructor takes three arrays as input, one is the list of titles, second is the list of times, and the third is the list of users.
+         * They populate the first, second and the third text boxes respectively in the list items. **/
         Texts = textlist;
         Times = timelist;
         Users = userlist;
