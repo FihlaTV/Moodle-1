@@ -80,9 +80,9 @@ public class Tab_view extends AppCompatActivity {
 
     }
 
-    private void UpdateCourses()
-    {
-        final List<String> your_array_list = new ArrayList<String>();
+    public void UpdateCourses()
+    {// to update the course list
+       final List<String> your_array_list = new ArrayList<String>();
         String url1="http://10.208.20.164:8000/courses/list.json";
         JsonObjectRequest json_ob = new JsonObjectRequest (Request.Method.GET, url1,null,
                 new Response.Listener<JSONObject>()
@@ -135,8 +135,8 @@ public class Tab_view extends AppCompatActivity {
 
     }
 
-    private void UpdateNotif()
-    {
+    public void UpdateNotif()
+    {// to update the notification fragment
         String url2="http://10.208.20.164:8000/default/notifications.json" ;
         final List<String> noti_text = new ArrayList<String>();
         final List<String> noti_time = new ArrayList<String>();

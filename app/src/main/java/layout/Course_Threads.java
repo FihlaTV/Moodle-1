@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import nikhil.ayush.aditi.moodleana.CourseTab;
@@ -35,6 +38,13 @@ import nikhil.ayush.aditi.moodleana.thread_detail;
 
 public class Course_Threads extends Fragment{
 String coursecode;
+    ArrayList<String> titles = new ArrayList<String>();
+    ArrayList<String> times = new ArrayList<String>();
+    ListView ThreadLV ;
+    CustomAdapter_Thread new_adap;
+    EditText title;
+    EditText desc;
+
     public Course_Threads() {
         // Required empty public constructor
     }
@@ -49,18 +59,20 @@ String coursecode;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_course__threads, container, false);
-        ListView ThreadLV = (ListView) view.findViewById(R.id.ThreadsLV);
+        ThreadLV = (ListView) view.findViewById(R.id.ThreadsLV);
         Bundle bundle = this.getArguments();
         coursecode = bundle.getString("Course Code");
-        ArrayList<String> titles = bundle.getStringArrayList("Name");
-        ArrayList<String> times = bundle.getStringArrayList("Updated On");
+         titles = bundle.getStringArrayList("Name");
+         times = bundle.getStringArrayList("Updated On");
+
 //         arraylist
        final ArrayList<Integer> ids = bundle.getIntegerArrayList("ID");
-        CustomAdapter_Thread new_adap = new CustomAdapter_Thread(getActivity().getApplicationContext(), titles, times);
+        new_adap = new CustomAdapter_Thread(getActivity().getApplicationContext(), titles, times);
         ThreadLV.setAdapter(new_adap);
         ThreadLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
                 Intent threadPage = new Intent(getActivity(), thread_detail.class);
                 threadPage.putExtra("ID", ids.get(position));
                 startActivity(threadPage);
@@ -70,14 +82,17 @@ String coursecode;
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText title = (EditText) view.findViewById(R.id.title);
-                EditText desc = (EditText) view.findViewById(R.id.description);
+                title = (EditText) view.findViewById(R.id.title);
+                desc = (EditText) view.findViewById(R.id.description);
                 String Title = String.valueOf(title.getText());
                 if (Title.length() == 0)
                     return;//Display an error message
                 String Description = String.valueOf(desc.getText());
                 String url = "http://10.208.20.164:8000/threads/new.json?title=" + Title + "&description=" + Description + "&course_code=" + coursecode;
                 System.out.println(url);
+                titles.add(title.getText().toString());
+                String formattedDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+                times.add(formattedDate);
                 JsonObjectRequest json_ob = new JsonObjectRequest(Request.Method.GET, url, null,
                         new Response.Listener<JSONObject>() {
                             @Override
@@ -86,8 +101,26 @@ String coursecode;
                                 Log.i("yo", "why this ... working");
                                 try {
                                     System.out.println(Boolean.toString(response.getBoolean("success")));
-                                    if (response.getBoolean("success")) {
+                                    if (response.getBoolean("success"))
+                                    {
                                         Toast.makeText(getActivity().getApplicationContext(), "Thread created successfully", Toast.LENGTH_SHORT).show();
+                                        new_adap = new CustomAdapter_Thread(getActivity().getApplicationContext(), titles, times);
+                                        ThreadLV.setAdapter(new_adap);
+
+// Fragment currentFragment = getFragmentManager().findFragmentByTag("Threads");
+//                                        FragmentTransaction fragTransaction = getFragmentManager().beginTransaction();
+//                                        fragTransaction.detach(currentFragment);
+//                                        ((CourseTab) getActivity()).UpdateThreads();
+//                                        try
+//                                        {
+//                                            Thread.sleep(1000);                 //1000 milliseconds is one second.
+//                                        }
+//                                        catch(InterruptedException ex)
+//                                        {
+//                                            Thread.currentThread().interrupt();
+//                                        }
+//                                        fragTransaction.attach(currentFragment);
+//                                        fragTransaction.commit();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();

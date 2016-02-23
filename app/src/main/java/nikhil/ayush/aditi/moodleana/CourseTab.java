@@ -91,7 +91,7 @@ public class CourseTab extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    private void UpdateAssgt()
+    public void UpdateAssgt()
     {
         String url="http://10.208.20.164:8000/courses/course.json/"+code+"/assignments";
         final List<String> Assignment_created=new ArrayList<String>();
@@ -102,24 +102,24 @@ public class CourseTab extends AppCompatActivity {
                 new Response.Listener<JSONObject>()
                 {
                     @Override
-                    public void onResponse(JSONObject response)
-                    {Log.i("yo", "why this ... working");
+                public void onResponse(JSONObject response)
+                {Log.i("yo", "why this ... working");
 ///                System.out.println(response.toString());
-                        try
-                        {JSONArray assign=response.getJSONArray("assignments");
-                            for(int i=0;i<assign.length();i++)
-                            {   Assignment_name.add(assign.getJSONObject(i).getString("name"));
-                                Assignment_created.add(assign.getJSONObject(i).getString("created_at"));
-                                Assignment_Deadline.add(assign.getJSONObject(i).getString("deadline"));
-                                Assgt_No.add(assign.getJSONObject(i).getInt("id"));
-                                b1=true;
-                            }
-                        } catch (JSONException e)
+                try
+                {JSONArray assign=response.getJSONArray("assignments");
+                for(int i=0;i<assign.length();i++)
+                {   Assignment_name.add(assign.getJSONObject(i).getString("name"));
+                    Assignment_created.add(assign.getJSONObject(i).getString("created_at"));
+                    Assignment_Deadline.add(assign.getJSONObject(i).getString("deadline"));
+                    Assgt_No.add(assign.getJSONObject(i).getInt("id"));
+                    b1=true;
+                }
+                } catch (JSONException e)
                         {
                             e.printStackTrace();
                             Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
-                    }
+                }
                 },
                 new Response.ErrorListener() {
                     @Override
@@ -137,7 +137,7 @@ public class CourseTab extends AppCompatActivity {
         Assignments.setArguments(one);
     }
 
-    private  void UpdateGrades()
+    public  void UpdateGrades()
     {
         String url1="http://10.208.20.164:8000/courses/course.json/"+code+"/grades";
         final List<String> Name_assign=new ArrayList<String>();
@@ -150,31 +150,28 @@ public class CourseTab extends AppCompatActivity {
                 {
                     @Override
                     public void onResponse(JSONObject response)
-                    {
-                        Log.i("yo", "why this ...grades..... working");
+                    {Log.i("yo", "why this ...grades..... working");
 ///                        System.out.println(response.toString());
-
-                        try
-                        {JSONArray grades=response.getJSONArray("grades");
-                            for(int i=0;i<grades.length();i++)
-                            {  Name_assign.add(grades.getJSONObject(i).getString("name"));
-                                int x =grades.getJSONObject(i).getInt("score");
-                                float y=(float) x;
-                                Assignment_Score.add( x);
-                                Out_of.add(grades.getJSONObject(i).getInt("out_of"));
-                                Weightage.add(grades.getJSONObject(i).getInt("weightage"));
-
+                try
+                {JSONArray grades=response.getJSONArray("grades");
+                    for(int i=0;i<grades.length();i++)
+                    {  Name_assign.add(grades.getJSONObject(i).getString("name"));
+                       int x =grades.getJSONObject(i).getInt("score");
+                       float y=(float) x;
+                        Assignment_Score.add( x);
+                        Out_of.add(grades.getJSONObject(i).getInt("out_of"));
+                        Weightage.add(grades.getJSONObject(i).getInt("weightage"));
                                 //Assignment_update.add(assign.getJSONObject(i).getString("updated_on"));
 
-                            }
+                    }
 //
-                        } catch (JSONException e)
-                        {
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(),
-                                    "Error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG).show();
-                        }
+                } catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),
+                            "Error: " + e.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                }
                         b3=true;System.out.println("bundle set oof");
                     }
                 },
@@ -196,7 +193,7 @@ public class CourseTab extends AppCompatActivity {
 
     }
 
-    private  void UpdateThreads()
+    public  void UpdateThreads()
     {
         String url2 = "http://10.208.20.164:8000/courses/course.json/"+code+"/threads";
         // object for course threads
@@ -207,17 +204,17 @@ public class CourseTab extends AppCompatActivity {
                 new Response.Listener<JSONObject>()
                 {@Override
                  public void onResponse(JSONObject response)
-                    {
-                        Log.i("yo", "why this ... working");
-///                        System.out.println(response.toString());
-                        try
-                        {JSONArray assign=response.getJSONArray("course_threads");
-//                      System.out.println("JSON for threads: " + assign);
-                            for(int i=0;i<assign.length();i++)
-                            {Thread_title.add(assign.getJSONObject(i).getString("title"));
-                                Thread_update.add(assign.getJSONObject(i).getString("created_at"));
-                                ThreadID.add(assign.getJSONObject(i).getInt("id"));
-                            }
+                 {
+                     Log.i("yo", "why this ... working");
+///                       System.out.println(response.toString());
+                     try
+                     {JSONArray assign=response.getJSONArray("course_threads");
+//                     System.out.println("JSON for threads: " + assign);
+                         for(int i=0;i<assign.length();i++) {
+                             Thread_title.add(assign.getJSONObject(i).getString("title"));
+                             Thread_update.add(assign.getJSONObject(i).getString("created_at"));
+                             ThreadID.add(assign.getJSONObject(i).getInt("id"));
+                         }
 //
                         } catch (JSONException e)
                         {
