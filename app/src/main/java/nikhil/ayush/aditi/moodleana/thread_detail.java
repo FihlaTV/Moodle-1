@@ -1,6 +1,7 @@
 package nikhil.ayush.aditi.moodleana;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -248,6 +249,48 @@ public class thread_detail extends AppCompatActivity {
 
         Volley.newRequestQueue(this).add(thread_json);
 
+    }
+
+    public void Logout(View view)
+    {
+        String logout = "http://10.208.20.164:8000/default/logout.json";
+        JsonObjectRequest json_not = new JsonObjectRequest (Request.Method.GET, logout,null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+
+                    public void onResponse(JSONObject response)
+                    {
+                        Log.i("yo", "Logout response");
+                        ///                        System.out.println(response.toString());
+
+                        try
+                        {
+                            System.out.println("Logout response: " + response);
+                             Integer noti_count = response.getInt("noti_count");
+                            if (noti_count != null)
+                            {
+//                                intent, to login page.
+                                Intent logPage = new Intent(getApplicationContext(), LoginPage.class);
+                                Toast.makeText(getApplicationContext(), "Logged out successfully!", Toast.LENGTH_SHORT).show();
+                                startActivity(logPage);
+                            }
+                        }
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(),	"Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("yo", "why this not working");
+                        //       Toast.makeText(Tab_view.this, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        Volley.newRequestQueue(this).add(json_not);
     }
 
 

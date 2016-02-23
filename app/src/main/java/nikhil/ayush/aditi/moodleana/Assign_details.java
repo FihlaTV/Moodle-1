@@ -75,10 +75,11 @@ public class Assign_details extends AppCompatActivity {
                             for (int i = 0; i < subm.length(); i ++)
                             {
                                 JSONObject submit = subm.getJSONObject(i);
-//                                sub_name.add(submit.getString(""));
-//                                sub_time.add(submit.getString(""));
+                                sub_name.add(submit.getString("name"));
+                                sub_time.add(submit.getString("created_at"));
                             }
                             ListView submissions = (ListView) findViewById(R.id.sublist);
+                            System.out.println(sub_name);
                             CustomAdapter_Thread adap = new CustomAdapter_Thread(getApplicationContext(), sub_name, sub_time);
                             submissions.setAdapter(adap);
 
