@@ -21,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.Integer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,6 +95,7 @@ public class CourseTab extends AppCompatActivity {
         //////////////////////////////////////////////////////////////////////////////////////////////////////
         final List<String> Thread_title=new ArrayList<String>();
         final List<String> Thread_update=new ArrayList<String>();
+        final List<Integer> Thread_ID = new ArrayList<>();
         JsonObjectRequest json_thread = new JsonObjectRequest (Request.Method.GET, url2,null,
                 new Response.Listener<JSONObject>()
                 {@Override
@@ -103,10 +105,11 @@ public class CourseTab extends AppCompatActivity {
 ///                        System.out.println(response.toString());
                         try
                         {JSONArray assign=response.getJSONArray("course_threads");
-//                      System.out.println("JSON for threads: " + assign);
+                      System.out.println("JSON for threads: " + assign);
                         for(int i=0;i<assign.length();i++)
                             {Thread_title.add(assign.getJSONObject(i).getString("title"));
                             Thread_update.add(assign.getJSONObject(i).getString("created_at"));
+//                                Thread_ID.add(assign.getJSONObject(i).getInt(""));
                             }
 //
                         } catch (JSONException e)
@@ -184,11 +187,13 @@ public class CourseTab extends AppCompatActivity {
         Bundle one =new Bundle();
         one.putStringArrayList("Name", (ArrayList<String>) Assignment_name);
         one.putStringArrayList("Created At", (ArrayList<String>) Assignment_created);
-        one.putStringArrayList("deadline",(ArrayList<String>) Assignment_Deadline);
+        one.putStringArrayList("deadline", (ArrayList<String>) Assignment_Deadline);
         Assignments.setArguments(one);
+
         Bundle two =new Bundle();
         two.putStringArrayList("Name", (ArrayList<String>) Thread_title);
         two.putStringArrayList("Updated On", (ArrayList<String>) Thread_update);
+        two.putIntegerArrayList("ID", (ArrayList<Integer>) Thread_ID)
 
 
         Threads.setArguments(two);

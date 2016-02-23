@@ -52,6 +52,7 @@ public class Course_Threads extends Fragment{
 //         arraylist
         CustomListAdapter new_adap = new CustomListAdapter((CourseTab)getActivity(), titles, times);
         ThreadLV.setAdapter(new_adap);
+//        ThreadLV. itemclick listener.
         return view;
     }
 
