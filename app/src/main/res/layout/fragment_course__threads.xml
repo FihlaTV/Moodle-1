@@ -44,9 +44,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SUBMIT"
-        android:id="@+id/button3"
+        android:id="@+id/submit"
         android:layout_centerHorizontal="true"
-        android:onClick="Post_thread"
         android:layout_below="@+id/description"
         android:layout_marginTop="20dp"
 />
@@ -56,7 +55,7 @@
         android:layout_height="fill_parent"
         android:paddingLeft="6dp"
         android:paddingRight="6dp"
-        android:layout_below="@+id/button3"
+        android:layout_below="@+id/submit"
         android:id="@+id/ThreadsLV"
         android:layout_marginTop="16dp">
     </ListView>

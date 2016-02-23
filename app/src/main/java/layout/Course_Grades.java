@@ -48,7 +48,7 @@ public class Course_Grades extends Fragment
             expand.add("Weightage: "+Float.toString(c));
             expand.add("Absolute Marks"+Float.toString(a*c/b));
             listDataHeader.add(name.get(i));
-            listDataChild.put("Assignment " + (i+1), expand);
+            listDataChild.put(name.get(i), expand);
         }
         System.out.println("yotry:"+listDataChild.size());
         System.out.println(listDataHeader.size());

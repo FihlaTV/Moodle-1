@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -47,7 +48,7 @@ String coursecode;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_course__threads, container, false);
+        final View view = inflater.inflate(R.layout.fragment_course__threads, container, false);
         ListView ThreadLV = (ListView) view.findViewById(R.id.ThreadsLV);
         Bundle bundle = this.getArguments();
         coursecode = bundle.getString("Course Code");
@@ -59,61 +60,58 @@ String coursecode;
         ThreadLV.setAdapter(new_adap);
         ThreadLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                Intent threadPage = new Intent(getActivity(),thread_detail.class);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent threadPage = new Intent(getActivity(), thread_detail.class);
                 threadPage.putExtra("ID", ids.get(position));
                 startActivity(threadPage);
+            }
+        });
+        Button post=(Button) view.findViewById(R.id.submit);
+        post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText title = (EditText) view.findViewById(R.id.title);
+                EditText desc = (EditText) view.findViewById(R.id.description);
+                String Title = String.valueOf(title.getText());
+                if (Title.length() == 0)
+                    return;//Display an error message
+                String Description = String.valueOf(desc.getText());
+                String url = "http://10.208.20.164:8000/threads/new.json?title=" + Title + "&description=" + Description + "&course_code=" + coursecode;
+                System.out.println(url);
+                JsonObjectRequest json_ob = new JsonObjectRequest(Request.Method.GET, url, null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+
+                                Log.i("yo", "why this ... working");
+                                try {
+                                    System.out.println(Boolean.toString(response.getBoolean("success")));
+                                    if (response.getBoolean("success")) {
+                                        Toast.makeText(getActivity().getApplicationContext(), "Thread created successfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    Toast.makeText(getActivity().getApplicationContext(),
+                                            "Error: " + e.getMessage(),
+                                            Toast.LENGTH_LONG).show();
+                                }
+
+
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.i("yo", "why this not working");
+                                //  Toast.makeText(getActivity().getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                Volley.newRequestQueue(getActivity().getApplicationContext()).add(json_ob);
             }
         });
         return view;
     }
 
 
-
-
-    public void Post_thread(View view)
-    {
-        EditText title=(EditText) view.findViewById(R.id.title);
-        EditText desc =(EditText) view.findViewById(R.id.description);
-        String Title= String.valueOf(title.getText());
-        if(Title.length()==0)
-            return;//Display an error message
-        String Description=String.valueOf(desc.getText());
-        String url="http://10.208.20.164:8000/threads/new.json?title="+Title+"&description="+Description+"&course_code="+coursecode;
-        JsonObjectRequest json_ob = new JsonObjectRequest (Request.Method.GET, url,null,
-                new Response.Listener<JSONObject>()
-                {
-                    @Override
-                    public void onResponse(JSONObject response)
-                    {
-                        Log.i("yo", "why this ... working");
-                        try
-                        {
-                            if (response.getBoolean("success"))
-                            {
-                                Toast.makeText(getActivity().getApplicationContext(),"Thread created successfully", Toast.LENGTH_SHORT);
-                            }
-                        }
-                        catch (JSONException e)
-                        {
-                            e.printStackTrace();
-                            Toast.makeText(getActivity().getApplicationContext(),
-                                    "Error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG).show();
-                        }
-
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("yo", "why this not working");
-                        //  Toast.makeText(getActivity().getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
-                    }
-                });
-        Volley.newRequestQueue(getActivity().getApplicationContext()).add(json_ob);
-    }
 
 }
