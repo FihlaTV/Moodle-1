@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -28,7 +30,7 @@ import java.util.List;
 import layout.CustomListAdapter;
 
 public class thread_detail extends AppCompatActivity {
-
+    int ID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,7 @@ public class thread_detail extends AppCompatActivity {
             return;
         }
 //        need thread id to get details.
-        int ID = data.getInt("ID");
+        ID = data.getInt("ID");
         System.out.println("Thread with ID " + ID);
         String thread_url="http://10.208.20.164:8000/threads/thread.json/" + ID;
 
@@ -140,7 +142,51 @@ public class thread_detail extends AppCompatActivity {
 
     public void PostComment(View view)
     {
-//        comment on a thread.
+        EditText txt = (EditText) findViewById(R.id.add_comm);
+        String comm = txt.getText().toString();
+        if (comm.length() == 0)
+            Toast.makeText(getApplicationContext(),"Comment cannot be empty" ,Toast.LENGTH_SHORT).show();
+        else
+        {
+            String post_comm = "http://10.208.20.164:8000/threads/post_comment.json?thread_id=" + ID  + "&description=" + comm;
+            JsonObjectRequest jsoncomm = new JsonObjectRequest(Request.Method.GET,
+                    post_comm, null, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    //Log.d(TAG, response.toString());
+
+                    try {
+                        // Parsing json object response
+                        // response will be a json object
+                        boolean success = response.getBoolean("success");
+                        //  String email = response.getString("email");
+                        if(success)
+                        {
+                            Toast.makeText(getApplicationContext(),"Comment posted successfully!",Toast.LENGTH_SHORT).show();
+                        }
+                        }
+                    catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
+            }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.d("Tag", "Error: " + error.getMessage());
+                    Toast.makeText(getApplicationContext(),
+                            error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            Volley.newRequestQueue(getApplicationContext()).add(jsoncomm);
+
+
+        }
+
     }
 
 

@@ -36,6 +36,7 @@ public class Tab_view extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private String Username;
+    private  String Password;
     MyApp_cookie app_list=new MyApp_cookie();
 //    final HashMap<Integer,String> hm =new HashMap<Integer,String>() ;
 
@@ -55,10 +56,33 @@ public class Tab_view extends AppCompatActivity {
         }
 
         Username = registrationData.getString("User");
-        String Password = registrationData.getString("Pass");
+        Password = registrationData.getString("Pass");
         setContentView(R.layout.activity_tab_view);
         mRequestStartTime = System.currentTimeMillis();
         String url = "http://10.208.20.164:8000/default/login.json?userid="+Username+"&password="+Password;
+        UpdateCourses();
+ ///////////////////////////////////////////////////////////////////////////////////
+        UpdateNotif();
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+        ///4 se c delayw2
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
+
+    }
+
+    private void UpdateCourses()
+    {
+        final List<String> your_array_list = new ArrayList<String>();
         String url1="http://10.208.20.164:8000/courses/list.json";
         JsonObjectRequest json_ob = new JsonObjectRequest (Request.Method.GET, url1,null,
                 new Response.Listener<JSONObject>()
@@ -67,7 +91,7 @@ public class Tab_view extends AppCompatActivity {
                     public void onResponse(JSONObject response)
                     {Log.i("yo", "why this ... working");
 //                    System.out.println(response.toString());
-                    try
+                        try
                         {
 //                            System.out.println("Tabview pe " + response);
                             int current_sem = response.getInt("current_sem");
@@ -99,7 +123,7 @@ public class Tab_view extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i("yo", "why this not working");
-                       Toast.makeText(Tab_view.this, error.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(Tab_view.this, error.toString(), Toast.LENGTH_LONG).show();
                     }
                 });
         Volley.newRequestQueue(this).add(json_ob);
@@ -108,7 +132,11 @@ public class Tab_view extends AppCompatActivity {
         bundle.putString("Pass", Password);
         bundle.putStringArrayList("String", (ArrayList<String>) your_array_list);
         One.setArguments(bundle);
- ///////////////////////////////////////////////////////////////////////////////////
+
+    }
+
+    private void UpdateNotif()
+    {
         String url2="http://10.208.20.164:8000/default/notifications.json" ;
         final List<String> noti_text = new ArrayList<String>();
         final List<String> noti_time = new ArrayList<String>();
@@ -150,7 +178,7 @@ public class Tab_view extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i("yo", "why this not working");
-                 //       Toast.makeText(Tab_view.this, error.toString(), Toast.LENGTH_LONG).show();
+                        //       Toast.makeText(Tab_view.this, error.toString(), Toast.LENGTH_LONG).show();
                     }
                 });
         Volley.newRequestQueue(this).add(json_not);
@@ -163,22 +191,9 @@ public class Tab_view extends AppCompatActivity {
         bundle3.putStringArrayList("noti_time", (ArrayList<String>) noti_time);
         three.setArguments(bundle3);
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-        ///4 se c delayw2
-
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
-
-
     }
+
+
 
     private void setupViewPager(ViewPager viewPager)
     {//Defines the number pf tabs
