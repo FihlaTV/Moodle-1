@@ -70,7 +70,7 @@ public class Tab_view extends AppCompatActivity {
 
                         try
                         {
-                            System.out.println("Tabview pe " + response);
+//                            System.out.println("Tabview pe " + response);
                             int current_sem = response.getInt("current_sem");
                             int current_year = response.getInt("current_year");
                             JSONObject user = response.getJSONObject("user");

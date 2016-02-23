@@ -60,6 +60,7 @@ public class CourseTab extends AppCompatActivity {
         final List<String> Assignment_name=new ArrayList<String>();
         final List<String> Assignment_created=new ArrayList<String>();
         final List<String> Assignment_Deadline=new ArrayList<String>();
+        final List<Integer> Assgt_No = new ArrayList<Integer>();
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
         JsonObjectRequest json_ob = new JsonObjectRequest (Request.Method.GET, url,null,
         new Response.Listener<JSONObject>()
@@ -74,6 +75,7 @@ public class CourseTab extends AppCompatActivity {
                     {   Assignment_name.add(assign.getJSONObject(i).getString("name"));
                         Assignment_created.add(assign.getJSONObject(i).getString("created_at"));
                         Assignment_Deadline.add(assign.getJSONObject(i).getString("deadline"));
+                        Assgt_No.add(assign.getJSONObject(i).getInt("id"));
                     }
                     } catch (JSONException e)
                 {
@@ -94,6 +96,7 @@ public class CourseTab extends AppCompatActivity {
         //////////////////////////////////////////////////////////////////////////////////////////////////////
         final List<String> Thread_title=new ArrayList<String>();
         final List<String> Thread_update=new ArrayList<String>();
+        final List<Integer> ThreadID = new ArrayList<Integer>();
         JsonObjectRequest json_thread = new JsonObjectRequest (Request.Method.GET, url2,null,
                 new Response.Listener<JSONObject>()
                 {@Override
@@ -107,6 +110,7 @@ public class CourseTab extends AppCompatActivity {
                         for(int i=0;i<assign.length();i++)
                             {Thread_title.add(assign.getJSONObject(i).getString("title"));
                             Thread_update.add(assign.getJSONObject(i).getString("created_at"));
+                                ThreadID.add(assign.getJSONObject(i).getInt("id"));
                             }
 //
                         } catch (JSONException e)
@@ -184,11 +188,15 @@ public class CourseTab extends AppCompatActivity {
         Bundle one =new Bundle();
         one.putStringArrayList("Name", (ArrayList<String>) Assignment_name);
         one.putStringArrayList("Created At", (ArrayList<String>) Assignment_created);
-        one.putStringArrayList("deadline",(ArrayList<String>) Assignment_Deadline);
+        one.putStringArrayList("deadline", (ArrayList<String>) Assignment_Deadline);
+        one.putIntegerArrayList("A_ID", (ArrayList<Integer>) Assgt_No);
+
         Assignments.setArguments(one);
         Bundle two =new Bundle();
         two.putStringArrayList("Name", (ArrayList<String>) Thread_title);
         two.putStringArrayList("Updated On", (ArrayList<String>) Thread_update);
+        two.putIntegerArrayList("ID", (ArrayList<Integer>) ThreadID);
+        two.putString("Course Code", code);
 
 
         Threads.setArguments(two);

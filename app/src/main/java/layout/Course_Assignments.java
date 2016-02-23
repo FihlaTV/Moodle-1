@@ -1,6 +1,7 @@
 package layout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.app.Activity;
 import android.view.ViewGroup;
 
+import nikhil.ayush.aditi.moodleana.Assign_details;
 import nikhil.ayush.aditi.moodleana.CourseTab;
 import nikhil.ayush.aditi.moodleana.ExpandableListAdapter;
 import nikhil.ayush.aditi.moodleana.MyApp_cookie;
@@ -29,6 +31,7 @@ public class Course_Assignments extends Fragment{
     public static ExpandableListView expListView;
     public static List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
+    ArrayList<Integer> A_ID;
     MyApp_cookie app_list=new MyApp_cookie();
 //    ListView Alv;
 //    Context context;
@@ -95,6 +98,7 @@ public class Course_Assignments extends Fragment{
       System.out.println("Recieved at Assgts: " + bundle);
       ArrayList<String> Name = bundle.getStringArrayList("Name");
       ArrayList<String> time = bundle.getStringArrayList("deadline");
+        A_ID = bundle.getIntegerArrayList("A_ID");
       expListView = (ExpandableListView) rootView.findViewById(R.id.lvExp);
 
       prepareListData(Name,time);
@@ -141,7 +145,11 @@ public class Course_Assignments extends Fragment{
           @Override
           public boolean onChildClick(ExpandableListView parent, View v,
                                       int groupPosition, int childPosition, long id) {
-              Toast.makeText(getActivity().getApplicationContext(), listDataHeader.get(groupPosition) + " : " + listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
+              Toast.makeText(getActivity().getApplicationContext(), "Child of expanded list clicked " + listDataHeader.get(groupPosition) + " : " + listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
+              Intent assgtPage = new Intent(getActivity().getApplicationContext(), Assign_details.class);
+              assgtPage.putExtra("Assgt No", A_ID.get(groupPosition));
+              startActivity(assgtPage);
+//              assgt number needed to get details.
               return false;
           }
       });

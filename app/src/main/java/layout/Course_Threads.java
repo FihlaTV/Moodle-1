@@ -1,6 +1,7 @@
 package layout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -27,10 +29,11 @@ import java.util.List;
 
 import nikhil.ayush.aditi.moodleana.CourseTab;
 import nikhil.ayush.aditi.moodleana.R;
+import nikhil.ayush.aditi.moodleana.thread_detail;
 
 
 public class Course_Threads extends Fragment{
-
+String coursecode;
     public Course_Threads() {
         // Required empty public constructor
     }
@@ -47,11 +50,22 @@ public class Course_Threads extends Fragment{
         View view = inflater.inflate(R.layout.fragment_course__threads, container, false);
         ListView ThreadLV = (ListView) view.findViewById(R.id.ThreadsLV);
         Bundle bundle = this.getArguments();
+        coursecode = bundle.getString("Course Code");
         ArrayList<String> titles = bundle.getStringArrayList("Name");
         ArrayList<String> times = bundle.getStringArrayList("Updated On");
 //         arraylist
-        CustomListAdapter new_adap = new CustomListAdapter((CourseTab)getActivity(), titles, times);
+       final ArrayList<Integer> ids = bundle.getIntegerArrayList("ID");
+        CustomAdapter_Thread new_adap = new CustomAdapter_Thread((CourseTab)getActivity(), titles, times);
         ThreadLV.setAdapter(new_adap);
+        ThreadLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Intent threadPage = new Intent(getActivity(),thread_detail.class);
+                threadPage.putExtra("ID", ids.get(position));
+                startActivity(threadPage);
+            }
+        });
         return view;
     }
 
@@ -66,8 +80,7 @@ public class Course_Threads extends Fragment{
         if(Title.length()==0)
             return;//Display an error message
         String Description=String.valueOf(desc.getText());
-        String url="http://10.208.20.164:8000/threads/new.json?title="+Title+"&description="+Description+"&course_code="+"cop290";
-        // WE NEED TO CHANGE ABOVE LINE
+        String url="http://10.208.20.164:8000/threads/new.json?title="+Title+"&description="+Description+"&course_code="+coursecode;
         JsonObjectRequest json_ob = new JsonObjectRequest (Request.Method.GET, url,null,
                 new Response.Listener<JSONObject>()
                 {
@@ -75,6 +88,20 @@ public class Course_Threads extends Fragment{
                     public void onResponse(JSONObject response)
                     {
                         Log.i("yo", "why this ... working");
+                        try
+                        {
+                            if (response.getBoolean("success"))
+                            {
+                                Toast.makeText(getActivity().getApplicationContext(),"Thread created successfully", Toast.LENGTH_SHORT);
+                            }
+                        }
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                            Toast.makeText(getActivity().getApplicationContext(),
+                                    "Error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
 
 
                     }

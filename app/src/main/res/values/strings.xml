@@ -19,4 +19,5 @@
     <string name="grades">grades</string>
     <string name="resources">resources</string>
     <string name="threads">threads</string>
+    <string name="title_activity_thread_detail">thread_detail</string>
 </resources>
