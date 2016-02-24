@@ -13,7 +13,7 @@ import java.util.Locale;
  */
 
 public class OtherWorks
-{
+{/** A modular way to handle all the methods not related to moodle **/
     public String time_left(String deadline)
     {
         /** This function returns the time remaining from deadline. **/

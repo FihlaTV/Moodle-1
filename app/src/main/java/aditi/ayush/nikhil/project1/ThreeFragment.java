@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class ThreeFragment extends Fragment{
 
-    /** This class populates the Notifications Tab on the main page.**/
+    /** This class (Fragment for Notifications tab) populates the Notifications Tab on the main page.**/
     public TextView msg ;
 
     public ThreeFragment() {
