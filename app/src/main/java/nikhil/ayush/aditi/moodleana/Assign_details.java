@@ -60,6 +60,11 @@ public class Assign_details extends AppCompatActivity {
                             TextView deadline = (TextView) findViewById(R.id.deadline);
                             deadline.setText(dead);
 
+                            OtherWorks timerem = new OtherWorks();
+                            String time_rem = timerem.time_left(dead);
+                            TextView time_reim_Tv = (TextView) findViewById(R.id.time_rem);
+                            time_reim_Tv.setText(time_rem);
+
                             int latedays = assgt.getInt("late_days_allowed");
                             TextView late = (TextView) findViewById(R.id.latedays);
                             late.setText("" + latedays + " days");
