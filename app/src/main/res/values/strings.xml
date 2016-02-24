@@ -32,5 +32,6 @@
     <string name="title_activity_thread_detail">thread_detail</string>
     <string name="Log_out">Log Out</string>
     <string name="Thread"><u>Threads</u></string>
+    <string name="Commenter"><u>Comments</u></string>
 
 </resources>
