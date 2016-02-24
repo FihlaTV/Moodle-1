@@ -108,6 +108,8 @@ public class Course_Threads extends Fragment{
                                         Toast.makeText(getActivity().getApplicationContext(), "Thread created successfully", Toast.LENGTH_SHORT).show();
                                         new_adap = new CustomAdapter_Thread(getActivity().getApplicationContext(), titles, times);
                                         ThreadLV.setAdapter(new_adap);
+                                        title.setText("");
+                                        desc.setText("");
 
 // Fragment currentFragment = getFragmentManager().findFragmentByTag("Threads");
 //                                        FragmentTransaction fragTransaction = getFragmentManager().beginTransaction();
