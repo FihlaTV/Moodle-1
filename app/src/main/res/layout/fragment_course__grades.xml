@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="layout.Course_Grades">
+    tools:context="layout.Course_Grades"
+    android:background="@color/ListBackground">
 
     <TextView
         android:layout_width="wrap_content"

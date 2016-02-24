@@ -26,7 +26,7 @@
     <string name="title_activity_course_tab">CourseTab</string>
     <string name="overview">overview</string>
     <string name="assignments">assignments</string>
-    <string name="grades">grades</string>
+    <string name="grades">No Grades</string>
     <string name="resources">resources</string>
     <string name="threads">threads</string>
     <string name="title_activity_thread_detail">thread_detail</string>
