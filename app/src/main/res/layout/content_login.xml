@@ -110,9 +110,10 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/message"
-                android:text="blah"
-                android:textColor="#ffff00"
-                android:layout_alignParentBottom="true"
+                android:text="ssasa"
+                android:textColor="#b6b605"
+                android:layout_below="@+id/password"
+                android:layout_marginTop="140dp"
                 android:layout_centerHorizontal="true"/>
 
 
