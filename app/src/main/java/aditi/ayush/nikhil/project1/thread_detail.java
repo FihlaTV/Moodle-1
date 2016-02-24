@@ -155,7 +155,7 @@ public class thread_detail extends AppCompatActivity
 
     public void PostComment(View view)
     {
-        EditText txt = (EditText) findViewById(R.id.add_comm);
+        final EditText txt = (EditText) findViewById(R.id.add_comm);
         String comm = txt.getText().toString();
         if (comm.length() == 0)
             Toast.makeText(getApplicationContext(),"Comment cannot be empty" ,Toast.LENGTH_SHORT).show();
@@ -178,6 +178,7 @@ public class thread_detail extends AppCompatActivity
                         if(success)
                         {
                             Toast.makeText(getApplicationContext(),"Comment posted successfully!",Toast.LENGTH_SHORT).show();
+                            txt.setText("");
                         }
                     }
                     catch (JSONException e)

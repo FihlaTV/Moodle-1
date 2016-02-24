@@ -272,10 +272,6 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.logout)
-        {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -286,16 +282,37 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera)
+            if (viewPager.getCurrentItem() != 0)
+            {
+                System.out.println(tabLayout.getSelectedTabPosition() + " : Selected tab");
+                viewPager.setCurrentItem(0);
+                tabLayout.setupWithViewPager(viewPager);
+                System.out.println(tabLayout.getSelectedTabPosition() + " : Selected tab");
+            }
+
+
+        else if (id == R.id.nav_gallery)
         {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_logout) {
+            if (viewPager.getCurrentItem() != 1)
+            {
+                System.out.println(tabLayout.getSelectedTabPosition() + " : Selected tab");
+                viewPager.setCurrentItem(1);
+                tabLayout.setupWithViewPager(viewPager);
+                System.out.println(tabLayout.getSelectedTabPosition() + " : Selected tab");
+            }
+        }
+        else if (id == R.id.nav_slideshow)
+        {
+            if (viewPager.getCurrentItem() != 2)
+            {
+                System.out.println(tabLayout.getSelectedTabPosition() + " : Selected tab");
+                viewPager.setCurrentItem(2);
+                tabLayout.setupWithViewPager(viewPager);
+                System.out.println(tabLayout.getSelectedTabPosition() + " : Selected tab");
+            }
+        }
+        else if (id == R.id.nav_logout)
+        {
             String url_out="http://10.208.20.164:8000/default/logout.json";
             JsonObjectRequest logout=new JsonObjectRequest(Request.Method.GET,
                     url_out, null, new Response.Listener<JSONObject>() {
@@ -338,9 +355,12 @@ public class MainActivity extends AppCompatActivity
             Volley.newRequestQueue(this).add(logout);
 
 
+        }
+        else if (id == R.id.nav_send)
+        {
 
         }
-
+//        else if (id = R.id.nav_)
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

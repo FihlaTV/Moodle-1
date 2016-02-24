@@ -13,21 +13,12 @@
         android:textSize="36dp"
         android:layout_marginLeft="20dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/res_fac"
-        android:layout_below="@+id/fac"
-        android:layout_marginTop="10dp"
-        android:text="Aditi change this 'blah"
-        android:layout_alignLeft="@+id/fac"
-        android:textSize="32dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/upload"
-        android:layout_below="@+id/res_fac"
+        android:layout_below="@+id/fac"
         android:layout_marginTop="24dp"
         android:text="Upload a private resource:"
         android:layout_alignLeft="@+id/fac"
