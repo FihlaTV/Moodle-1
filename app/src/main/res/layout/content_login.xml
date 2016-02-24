@@ -66,10 +66,10 @@
                 android:text="Login"
                 android:id="@+id/Login"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="140dp"
                 android:textSize="45sp"
                 android:layout_centerHorizontal="true"
-                android:textColor="#ffffff" />
+                android:textColor="#093556" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -88,10 +88,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignBottom="@+id/Login"
-                android:layout_marginBottom="80dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginBottom="75dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
                 android:layout_alignLeft="@+id/Username"
                 android:layout_alignStart="@+id/Username"
                 android:layout_alignRight="@+id/Username"
@@ -102,7 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:id="@+id/imageView2"
-                    android:background="@drawable/maxresdefault"/>
+                    android:background="@drawable/logo_transparent"/>
             </TableRow>
 
             <TextView
@@ -111,7 +111,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/message"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"/>
 
 
         </RelativeLayout>

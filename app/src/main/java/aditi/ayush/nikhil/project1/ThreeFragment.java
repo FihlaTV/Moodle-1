@@ -58,6 +58,10 @@ public class ThreeFragment extends Fragment{
         if(noti_text.isEmpty())
         {
             msg.setText("No New Notifications");
+            TextView Notes = (TextView) ret_view.findViewById(R.id.No_Notification);
+            Notes.setVisibility(View.VISIBLE);
+            ListView Lister = (ListView) ret_view.findViewById(R.id.notif_list);
+            Lister.setVisibility(View.INVISIBLE);
         }
 //        list view needed.
         else

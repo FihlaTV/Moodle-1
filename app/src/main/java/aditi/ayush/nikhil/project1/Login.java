@@ -59,7 +59,7 @@ public class Login extends AppCompatActivity {
 
 
         TextView myTextView = (TextView) findViewById(R.id.Login);
-        Typeface typeFace = FontLoader.getTypeFace(this, "Pacifico");
+        Typeface typeFace = FontLoader.getTypeFace(this, "doridrobot");
         if (typeFace != null) myTextView.setTypeface(typeFace);
         CookieManager cookieManage = new CookieManager();
         CookieHandler.setDefault(cookieManage);
