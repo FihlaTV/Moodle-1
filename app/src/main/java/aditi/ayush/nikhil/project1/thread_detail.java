@@ -93,7 +93,7 @@ public class thread_detail extends AppCompatActivity
 
                             ArrayList<String> comment_text = new ArrayList<>();
                             ArrayList<String> comm_user = new ArrayList<>();
-                            List<String> x = (List<String>)response.get("times_readable");
+                            JSONArray x = response.getJSONArray("times_readable");
                             System.out.println(x);
                             ArrayList<String> times_Read = new ArrayList<>();
 
@@ -101,7 +101,7 @@ public class thread_detail extends AppCompatActivity
                             for(int i=0;i<comments.length();i++)
                             {    JSONObject comment= comments.getJSONObject(i);
                                 JSONObject comment_user = comment_users.getJSONObject(i);
-                                String xtime = x.get(i);
+                                String xtime = x.getString(i);
 //                                u have the user and comment details and time of post.
 //                                TODO : parse times_readable.
                                 comment_text.add(comment.getString("description"));
@@ -323,7 +323,46 @@ public class thread_detail extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.logout) {
+            String url_out="http://10.208.20.164:8000/default/logout.json";
+            JsonObjectRequest logout=new JsonObjectRequest(Request.Method.GET,
+                    url_out, null, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    //Log.d(TAG, response.toString());
+
+                    try {
+                        // Parsing json object response
+                        // response will be a json object
+                        int noti_count=response.getInt("noti_count");
+                        if(noti_count==4)
+                        {
+                            Toast.makeText(getApplicationContext(),"Logout Succesful",Toast.LENGTH_SHORT).show();
+                            Intent i=new Intent(getApplicationContext(),Login.class);
+                            startActivity(i);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(),
+                                "Error: " + e.getMessage(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                    //  hidepDialog();
+                }
+            }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.d("Tag", "Error: " + error.getMessage());
+                    Toast.makeText(getApplicationContext(),
+                            error.getMessage(), Toast.LENGTH_SHORT).show();
+                    // hide the progress dialog
+                    // hidepDialog();
+                }
+            });
+
+            Volley.newRequestQueue(this).add(logout);
             return true;
         }
 

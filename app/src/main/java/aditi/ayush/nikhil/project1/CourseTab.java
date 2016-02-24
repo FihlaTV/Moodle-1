@@ -1,5 +1,6 @@
 package aditi.ayush.nikhil.project1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -58,6 +60,7 @@ public class CourseTab extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_tab);
 
@@ -268,9 +271,9 @@ public class CourseTab extends AppCompatActivity
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(Overview, "Overview");
-        adapter.addFragment(Assignments, "Assignments");
         adapter.addFragment(Resources, "Resources");
         adapter.addFragment(Threads, "Threads");
+        adapter.addFragment(Assignments, "Assignments");
         adapter.addFragment(Grades, "Grades");
         viewPager.setAdapter(adapter);
     }
@@ -329,7 +332,46 @@ public class CourseTab extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.logout) {
+            String url_out="http://10.208.20.164:8000/default/logout.json";
+            JsonObjectRequest logout=new JsonObjectRequest(Request.Method.GET,
+                    url_out, null, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    //Log.d(TAG, response.toString());
+
+                    try {
+                        // Parsing json object response
+                        // response will be a json object
+                        int noti_count=response.getInt("noti_count");
+                        if(noti_count==4)
+                        {
+                            Toast.makeText(getApplicationContext(),"Logout Succesful",Toast.LENGTH_SHORT).show();
+                            Intent i=new Intent(getApplicationContext(),Login.class);
+                            startActivity(i);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(),
+                                "Error: " + e.getMessage(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                    //  hidepDialog();
+                }
+            }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.d("Tag", "Error: " + error.getMessage());
+                    Toast.makeText(getApplicationContext(),
+                            error.getMessage(), Toast.LENGTH_SHORT).show();
+                    // hide the progress dialog
+                    // hidepDialog();
+                }
+            });
+
+            Volley.newRequestQueue(this).add(logout);
             return true;
         }
 

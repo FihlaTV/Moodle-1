@@ -54,7 +54,7 @@ public class OneFragment extends Fragment {
                 // TODO Auto-generated method stub
 
                 //You could lookup by position, but "name" is more general)
-                Toast.makeText(getActivity().getApplication(), "position selcted is " + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getBaseContext(), "Loading Course Page...It may take time",Toast.LENGTH_LONG).show();
                 Intent coursePage = new Intent(getActivity().getApplicationContext(), CourseTab.class);
                 System.out.println("current position(onefragment): " + (position + 1) + " " + app_list.course_code.get(position + 1));
                 coursePage.putExtra("Course Code", app_list.course_code.get(position + 1));
