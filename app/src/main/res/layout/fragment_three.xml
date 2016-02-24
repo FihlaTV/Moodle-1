@@ -64,6 +64,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:gravity="center"
+            android:textSize="16dp"
             android:textColor="@color/colorAccent"
             android:text="S.No." />
 
@@ -77,6 +78,7 @@
             android:layout_toRightOf="@+id/Image_No"
             android:layout_toEndOf="@+id/Image_No"
             android:layout_marginLeft="1dp"
+            android:textSize="16dp"
             android:gravity="center"
             android:textColor="@color/colorAccent"
             android:text="Notifications" />
@@ -90,6 +92,7 @@
             android:layout_marginLeft="1dp"
             android:layout_toRightOf="@+id/Image_notification"
             android:layout_toEndOf="@+id/Image_notification"
+            android:textSize="16dp"
             android:layout_alignParentRight="true"
             android:gravity="center"
             android:textColor="@color/colorAccent"

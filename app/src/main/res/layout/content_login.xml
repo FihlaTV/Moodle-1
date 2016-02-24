@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Login"
+                android:text="login"
                 android:id="@+id/Login"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="140dp"
@@ -73,7 +73,7 @@
 
             <Button
                 style="?android:attr/buttonStyleSmall"
-                android:text="Submit"
+                android:text="LOGIN"
                 android:id="@+id/button"
                 android:layout_alignBottom="@+id/password"
                 android:layout_centerHorizontal="true"
