@@ -59,6 +59,10 @@ public class Course_Threads extends Fragment{
         Button post=(Button) view.findViewById(R.id.post_comment);
 
         Bundle bundle = this.getArguments();
+        if(bundle==null)
+        {
+            return view;
+        }
         coursecode = bundle.getString("Course Code");
         titles = bundle.getStringArrayList("Name");
         times = bundle.getStringArrayList("Updated On");

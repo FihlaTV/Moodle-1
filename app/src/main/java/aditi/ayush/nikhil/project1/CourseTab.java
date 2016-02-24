@@ -63,7 +63,7 @@ public class CourseTab extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_tab);
-
+        Toast.makeText(this, "Loading Course Page...It may take time",Toast.LENGTH_LONG).show();
         Bundle data=getIntent().getExtras();
         if(data == null) {
             return;
@@ -79,17 +79,17 @@ public class CourseTab extends AppCompatActivity
 
         float tme=System.currentTimeMillis();
         //while(!(b1&&b2&&b3))
+
+
+        System.out.println("bundle setting");
         try
         {
-            Thread.sleep(4500);                 //1000 milliseconds is one second.
+            Thread.sleep(1200);                 //1000 milliseconds is one second.
         }
         catch(InterruptedException ex)
         {
             Thread.currentThread().interrupt();
         }
-
-        System.out.println("bundle setting");
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -138,6 +138,12 @@ public class CourseTab extends AppCompatActivity
                                 Assgt_No.add(assign.getJSONObject(i).getInt("id"));
                                 b1=true;
                             }
+                            Bundle one =new Bundle();
+                            one.putStringArrayList("Name", (ArrayList<String>) Assignment_name);
+                            one.putStringArrayList("Created At", (ArrayList<String>) Assignment_created);
+                            one.putStringArrayList("deadline", (ArrayList<String>) Assignment_Deadline);
+                            one.putIntegerArrayList("A_ID", (ArrayList<Integer>) Assgt_No);
+                            Assignments.setArguments(one);
                         } catch (JSONException e)
                         {
                             e.printStackTrace();
@@ -153,12 +159,7 @@ public class CourseTab extends AppCompatActivity
                     }
                 });
         Volley.newRequestQueue(getApplicationContext()).add(json_ob);
-        Bundle one =new Bundle();
-        one.putStringArrayList("Name", (ArrayList<String>) Assignment_name);
-        one.putStringArrayList("Created At", (ArrayList<String>) Assignment_created);
-        one.putStringArrayList("deadline", (ArrayList<String>) Assignment_Deadline);
-        one.putIntegerArrayList("A_ID", (ArrayList<Integer>) Assgt_No);
-        Assignments.setArguments(one);
+
     }
 
     public  void UpdateGrades()
@@ -179,15 +180,23 @@ public class CourseTab extends AppCompatActivity
                         try
                         {JSONArray grades=response.getJSONArray("grades");
                             for(int i=0;i<grades.length();i++)
-                            {  Name_assign.add(grades.getJSONObject(i).getString("name"));
+                            {
+                                Name_assign.add(grades.getJSONObject(i).getString("name"));
                                 int x =grades.getJSONObject(i).getInt("score");
-                                float y=(float) x;
+//                                float y=(float) x;
                                 Assignment_Score.add( x);
                                 Out_of.add(grades.getJSONObject(i).getInt("out_of"));
                                 Weightage.add(grades.getJSONObject(i).getInt("weightage"));
                                 //Assignment_update.add(assign.getJSONObject(i).getString("updated_on"));
 
                             }
+                            Bundle three =new Bundle();
+                            three.putStringArrayList("Name", (ArrayList<String>) Name_assign);
+                            three.putIntegerArrayList("Score", (ArrayList<Integer>) Assignment_Score);
+                            three.putIntegerArrayList("Out_of", (ArrayList<Integer>) Out_of);
+                            three.putIntegerArrayList("Weightage", (ArrayList<Integer>) Weightage);
+                            System.out.println("Sending bundle: " + three);
+                            Grades.setArguments(three);
 //
                         } catch (JSONException e)
                         {
@@ -207,12 +216,8 @@ public class CourseTab extends AppCompatActivity
                     }
                 });
         Volley.newRequestQueue(getApplicationContext()).add(json_grade);
-        Bundle three =new Bundle();
-        three.putStringArrayList("Name", (ArrayList<String>) Name_assign);
-        three.putIntegerArrayList("Score", (ArrayList<Integer>) Assignment_Score);
-        three.putIntegerArrayList("Out_of", (ArrayList<Integer>) Out_of);
-        three.putIntegerArrayList("Weightage", (ArrayList<Integer>) Weightage);
-        Grades.setArguments(three);
+
+
 
 
     }
@@ -248,6 +253,14 @@ public class CourseTab extends AppCompatActivity
                                     Toast.LENGTH_LONG).show();
                         }
                         b2=true;
+
+                        Bundle two =new Bundle();
+                        two.putStringArrayList("Name", (ArrayList<String>) Thread_title);
+                        two.putStringArrayList("Updated On", (ArrayList<String>) Thread_update);
+                        two.putIntegerArrayList("ID", (ArrayList<Integer>) ThreadID);
+                        two.putString("Course Code", code);
+
+                        Threads.setArguments(two);
                     }
                 },
                 new Response.ErrorListener() {
@@ -259,13 +272,6 @@ public class CourseTab extends AppCompatActivity
                 });
         Volley.newRequestQueue(getApplicationContext()).add(json_thread);
 
-        Bundle two =new Bundle();
-        two.putStringArrayList("Name", (ArrayList<String>) Thread_title);
-        two.putStringArrayList("Updated On", (ArrayList<String>) Thread_update);
-        two.putIntegerArrayList("ID", (ArrayList<Integer>) ThreadID);
-        two.putString("Course Code", code);
-
-        Threads.setArguments(two);
     }
 
     private void setupViewPager(ViewPager viewPager) {

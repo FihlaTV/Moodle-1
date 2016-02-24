@@ -1,5 +1,6 @@
 package aditi.ayush.nikhil.project1;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -54,12 +55,13 @@ public class OneFragment extends Fragment {
                 // TODO Auto-generated method stub
 
                 //You could lookup by position, but "name" is more general)
-                Toast.makeText(getActivity().getBaseContext(), "Loading Course Page...It may take time",Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity().getBaseContext(), "Loading Course Page...It may take time",Toast.LENGTH_LONG).show();
                 Intent coursePage = new Intent(getActivity().getApplicationContext(), CourseTab.class);
+
                 System.out.println("current position(onefragment): " + (position + 1) + " " + app_list.course_code.get(position + 1));
                 coursePage.putExtra("Course Code", app_list.course_code.get(position + 1));
 //                Intent intent = new Intent(getActivity(), CourseTab.class);
-                startActivity(coursePage);
+               startActivity(coursePage);
 // all intents to be put here
 
             }
@@ -67,5 +69,8 @@ public class OneFragment extends Fragment {
         return myFragmentView;
     }
 
+public void displayToast()
+{ Toast.makeText(getActivity().getBaseContext(), "Loading Course Page...It may take time",Toast.LENGTH_LONG).show();
 
+}
 }

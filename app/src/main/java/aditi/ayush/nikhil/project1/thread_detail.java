@@ -131,6 +131,14 @@ public class thread_detail extends AppCompatActivity
                 });
 
         Volley.newRequestQueue(this).add(thread_json);
+        try
+        {
+            Thread.sleep(500);                 //1000 milliseconds is one second.
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -158,7 +166,8 @@ public class thread_detail extends AppCompatActivity
                     post_comm, null, new Response.Listener<JSONObject>() {
 
                 @Override
-                public void onResponse(JSONObject response) {
+                public void onResponse(JSONObject response)
+                {
                     //Log.d(TAG, response.toString());
 
                     try {
@@ -189,6 +198,7 @@ public class thread_detail extends AppCompatActivity
 
             Volley.newRequestQueue(getApplicationContext()).add(jsoncomm);
             UpdateComments();
+            txt.setText("");
 
         }
 
@@ -252,6 +262,14 @@ public class thread_detail extends AppCompatActivity
                 });
 
         Volley.newRequestQueue(this).add(thread_json);
+        try
+        {
+            Thread.sleep(500);                 //1000 milliseconds is one second.
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
 
     }
 
