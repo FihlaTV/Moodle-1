@@ -44,6 +44,7 @@ public class Course_Assignments extends Fragment{
     public void prepareListData(ArrayList<String> name,ArrayList<String> time)
     {
         /** **/
+        OtherWorks deadline=new OtherWorks();
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
         System.out.println("ttt"+name.size()+" : "+time.size());
@@ -51,8 +52,11 @@ public class Course_Assignments extends Fragment{
         {
             List<String> expand =new ArrayList<String>();
             expand.add(""+(i+1)+":"+name.get(i));
-            System.out.println(i+name.get(i));
-            expand.add("Time Remaining:"+time.get(i));
+            System.out.println(i + name.get(i));
+            String str=deadline.time_left(time.get(i));
+            expand.add("Time Remaining:"+str);
+            System.out.println(str+ "  is the remaining time");
+
             listDataHeader.add("Assignment "+i);
             listDataChild.put("Assignment " + i, expand);
         }

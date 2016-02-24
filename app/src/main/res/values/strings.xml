@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project1</string>
+    <string name="app_name">MoodlePlus</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -30,5 +30,6 @@
     <string name="resources">resources</string>
     <string name="threads">threads</string>
     <string name="title_activity_thread_detail">thread_detail</string>
+    <string name="Log_out">Log Out</string>
 
 </resources>
