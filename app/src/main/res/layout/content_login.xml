@@ -110,6 +110,8 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/message"
+                android:text="blah"
+                android:textColor="#ffff00"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"/>
 

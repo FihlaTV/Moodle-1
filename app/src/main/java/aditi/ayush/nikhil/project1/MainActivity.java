@@ -282,8 +282,6 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera)
-        {
             if (viewPager.getCurrentItem() != 0)
             {
                 System.out.println(tabLayout.getSelectedTabPosition() + " : Selected tab");
@@ -292,7 +290,7 @@ public class MainActivity extends AppCompatActivity
                 System.out.println(tabLayout.getSelectedTabPosition() + " : Selected tab");
             }
 
-        }
+
         else if (id == R.id.nav_gallery)
         {
             if (viewPager.getCurrentItem() != 1)
@@ -332,6 +330,7 @@ public class MainActivity extends AppCompatActivity
                             Toast.makeText(getApplicationContext(),"Logout Succesful",Toast.LENGTH_SHORT).show();
                             Intent i=new Intent(getApplicationContext(),Login.class);
                             startActivity(i);
+                            finish();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

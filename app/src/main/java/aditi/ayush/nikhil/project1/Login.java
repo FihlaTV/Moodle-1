@@ -80,61 +80,77 @@ public class Login extends AppCompatActivity {
         final String Password = Pass.getText().toString();  Log.i("yo", "why this working");
         final TextView message = (TextView) findViewById(R.id.message);
         String url = "http://10.208.20.164:8000/default/login.json?userid="+Username+"&password="+Password;
-        String url1="http://10.208.20.164:8000/courses/list.json";
         String url_1="http://10.208.20.164:8000/default/login.json?userid=cs5110271&password=abhishek";
         final Intent mainIntent = new Intent(this, MainActivity.class);
 
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                url_1, null, new Response.Listener<JSONObject>() {
+        if (Username.length() == 0)
+        {
+            message.setText("Username cannot be empty.");
+            Pass.setText("");
+        }
+        else
+        {
+            if (Password.length() == 0)
+            {
+                message.setText("Password cannot be empty");
+                User.setText("");
+            }
+            else
+            {
 
-            @Override
-            public void onResponse(JSONObject response) {
-                //Log.d(TAG, response.toString());
+                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                        url_1, null, new Response.Listener<JSONObject>() {
 
-                try {
-                    // Parsing json object response
-                    // response will be a json object
-                    boolean success = response.getBoolean("success");
-                    //  String email = response.getString("email");
-                    JSONObject user = response.getJSONObject("user");
-                    String entry = user.getString("entry_no");
-                    String email = user.getString("email");
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        //Log.d(TAG, response.toString());
 
-                    String jsonResponse = "";
-                    jsonResponse += "Name: " + entry + "\n\n";
-                    jsonResponse += "Email: " + email + "\n\n";
-                    if(success)
-                    {
-                        mainIntent.putExtra("User", Username);
-                        mainIntent.putExtra("Pass", Password);
-                        message.setText("Success");
-                        Toast.makeText(getApplicationContext(),"Loading",Toast.LENGTH_SHORT).show();
-                        startActivity(mainIntent);
+                        try {
+                            // Parsing json object response
+                            // response will be a json object
+                            boolean success = response.getBoolean("success");
+                            //  String email = response.getString("email");
+                            JSONObject user = response.getJSONObject("user");
+                            String entry = user.getString("entry_no");
+                            String email = user.getString("email");
+
+                            String jsonResponse = "";
+                            jsonResponse += "Name: " + entry + "\n\n";
+                            jsonResponse += "Email: " + email + "\n\n";
+                            if(success)
+                            {
+                                mainIntent.putExtra("User", Username);
+                                mainIntent.putExtra("Pass", Password);
+                                message.setText("Login successful!");
+                                Toast.makeText(getApplicationContext(),"Loading",Toast.LENGTH_SHORT).show();
+                                startActivity(mainIntent);
 
 
 
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(),
+                                    "Error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                        //  hidepDialog();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(),
-                            "Error: " + e.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                }
-                //  hidepDialog();
-            }
-        }, new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("Tag", "Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_SHORT).show();
-                // hide the progress dialog
-                // hidepDialog();
-            }
-        });
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.d("Tag", "Error: " + error.getMessage());
+                        Toast.makeText(getApplicationContext(),
+                                error.getMessage(), Toast.LENGTH_SHORT).show();
+                        // hide the progress dialog
+                        // hidepDialog();
+                    }
+                });
 
-        Volley.newRequestQueue(this).add(jsonObjReq);
+                Volley.newRequestQueue(this).add(jsonObjReq);
+            }
+        }
 
 
     }
@@ -159,6 +175,7 @@ public class Login extends AppCompatActivity {
         );
         AppIndex.AppIndexApi.start(client, viewAction);
     }
+
 
     @Override
     public void onStop() {
