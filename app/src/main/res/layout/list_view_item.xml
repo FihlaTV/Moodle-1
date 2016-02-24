@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/label"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+
+        android:textSize="18dip"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:background="#093556"
+        android:paddingLeft = "10dp"
+        android:paddingTop="18dp">
+    </TextView>
+
