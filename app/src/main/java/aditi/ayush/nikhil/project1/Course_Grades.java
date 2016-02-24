@@ -43,7 +43,7 @@ public class Course_Grades extends Fragment
             expand.add("Weightage: "+Float.toString(c));
             expand.add("Absolute Marks"+Float.toString(a*c/b));
             listDataHeader.add(name.get(i));
-            listDataChild.put(name.get(i) + (i+1), expand);
+            listDataChild.put(name.get(i), expand);
         }
         System.out.println("yotry:"+listDataChild.size());
         System.out.println(listDataHeader.size());
@@ -57,8 +57,12 @@ public class Course_Grades extends Fragment
 
         // Inflate the layout for this fragment
         View rootView= inflater.inflate(R.layout.fragment_course__grades, container, false);
-        Bundle bundle = this.getArguments();
-        System.out.println("Recieved at Assgts: " + bundle);
+         Bundle bundle = this.getArguments();
+        if(bundle==null)
+        {
+            return rootView;
+        }
+        System.out.println("Recieved at grades: " + bundle);
         ArrayList<String> Name = bundle.getStringArrayList("Name");
         ArrayList<Integer> Score = bundle.getIntegerArrayList("Score");
         ArrayList<Integer> Out_of = bundle.getIntegerArrayList("Out_of");

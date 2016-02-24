@@ -69,11 +69,13 @@ public class Course_Assignments extends Fragment{
 
         View rootView = inflater.inflate(R.layout.fragment_two, null);
         ListView Assgt_lv = (ListView) rootView.findViewById(R.id.AssgtCustomList);
+
         Bundle bundle = this.getArguments();
         if(bundle==null)
         {   System.out.println(":(");
             return rootView;
         }
+
         System.out.println("Recieved at Assgts: " + bundle);
         ArrayList<String> Name = bundle.getStringArrayList("Name");
         ArrayList<String> time = bundle.getStringArrayList("deadline");
