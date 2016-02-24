@@ -273,7 +273,30 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.logout)
-        {   String url_out="http://10.208.20.164:8000/default/logout.json";
+        {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera)
+        {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_logout) {
+            String url_out="http://10.208.20.164:8000/default/logout.json";
             JsonObjectRequest logout=new JsonObjectRequest(Request.Method.GET,
                     url_out, null, new Response.Listener<JSONObject>() {
 
@@ -284,12 +307,13 @@ public class MainActivity extends AppCompatActivity
                     try {
                         // Parsing json object response
                         // response will be a json object
-                       int noti_count=response.getInt("noti_count");
+                        int noti_count=response.getInt("noti_count");
                         if(noti_count==4)
                         {
                             Toast.makeText(getApplicationContext(),"Logout Succesful",Toast.LENGTH_SHORT).show();
                             Intent i=new Intent(getApplicationContext(),Login.class);
                             startActivity(i);
+                            finish();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -314,27 +338,6 @@ public class MainActivity extends AppCompatActivity
             Volley.newRequestQueue(this).add(logout);
 
 
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
 
