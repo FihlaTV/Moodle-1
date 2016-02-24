@@ -54,7 +54,7 @@ public class Course_Threads extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_course__threads, container, false);
-        ThreadLV = (ListView) view.findViewById(R.id.ThreadsLV);
+        ThreadLV = (ListView) view.findViewById(R.id.commentList);
 
         Button post=(Button) view.findViewById(R.id.post_comment);
 

@@ -1,0 +1,236 @@
+\documentclass{article}
+\setlength{\topmargin}{-.3in}
+\setlength{\textheight}{9in}
+\setlength{\oddsidemargin}{.125in}
+\setlength{\textwidth}{6.25in}
+% \usepackage{titling}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{listings}
+
+\begin{document}
+\title{COP290 - Moodle Android App: Design Document}
+% \posttitle{\par{COP 290: Design Practices in Computer Science\par}}
+\author{ Aditi(2014CS10205), Ayush Bhardwaj(2014CS10091), Nikhil Gupta(2014CS5140462)}
+
+\maketitle
+
+\section{Overall Design}
+
+Our overall design of the Moodle app would consist of three main activities. The first one would be the splash screen, which would be displayed for a fixed amount of time. The next activity is the main login page, where there are separate fields to login as a student or as a teacher. After the user logs in successfully, the main dashboard appears. From there, the user can navigate to the activity for each course. Also, there are separate activities for displaying details of the assignments and threads.\\
+As per the requirements of the assignment,
+\begin{itemize}
+\item Different layouts~\cite{multiple_screen_sizes} have been made for tablet and mobile phone view for all the three activities.
+\item Different classes have been defined in separate files to maintain modularity in code.
+\item \textbf{Doxygen} has been implemented to create an HTML documentation of the application structure.
+\item Various resources, such as strings, images and styles, have been included in separate files.
+\item Volley has been used to interact with the server.
+\end{itemize} 
+
+\section{User Interface}
+%\begin{itemize}
+\subsection{Splash Screen} The files activity\_msplash.xml and content\_msplash.xml define the layout of the splash screen. It consists of a big image that contains the logo and name of the application. An animation~\cite{animations} has been applied on the app logo to make it grow and shrink. Below is the screen shot of the splash screen in tablet view. 
+% The layout for tab view is in layout-sw590dp folder.(This is automatically picked when smallest width exceeds 590 dp)
+
+% \begin{figure}[!ht]
+% 	\centering
+%   \includegraphics[scale=0.8]{./N10-Splash.png}
+%   \caption{ Splash Screen on Nexus 10(Landscape)}
+% \end{figure}
+
+\subsection{Design Of LoginPage Activity}
+\par\noindent This page appears just after the splash screen. It contains fields for the user to enter his login details, alongwith a LogIn button.
+\begin{itemize}
+\item The layout of main login page has been defined by activity\_login\_page.xml and content\_login\_page.xml files in the layout folder.
+
+\end{itemize} 
+
+\par\noindent The following are the screen shots of the main page on different orientations as well as screen sizes~\cite{figures_in_latex}:
+
+% \begin{figure}
+% 	\centering
+%   \includegraphics[scale=0.8]{N10-land.PNG}
+%   \caption{ Main Screen on Nexus 10(Landscape)}
+%   \label{n10main}
+% \end{figure}
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[scale=0.75]{N6.PNG}
+%     \caption{Main Screen on Nexus 6(Portrait)}
+%     \label{n9p}
+% \end{figure}
+
+\subsection{DashBoard (Tab\_view)}
+It appears when the user has been logged in successfully, as a student. It contains all the main information about the student and his courses.
+It is divided into multiple tabs, as explained below:
+\begin{itemize}
+\item \textbf{Overview} : It contains the details about the student's semester, year, alongwith his user name.
+\item \textbf{Grades} : It displays the list of the student's grades, of all courses. Each item in the ListView expands on clicking, to display the details of the particular exam.
+\item \textbf{Courses} : It contains the list of the courses the student is enrolled in.The elements in the list are clickable, and a new page(CourseTab) containing the details of the particular course opens up on clicking on a ListItem.
+\item \textbf{Notifications} : It displays the list of the recent notifications for the user. A CustomListView has been used to improve the interface.
+\end{itemize}
+\par\noindent The tabs are horizontally scrollable, as they cannot fit simultaneously on all screen widths.
+\par\noindent To make the navigation among various sections of the app easier, a \textbf{Navigation drawer} has also been included in the Tab\_view activity. It appears on clicking on the icon on the top left, or also by swiping to the right on the screen.
+ Below are the screenshots of the various tabs of the dashboard, with and without the navigation drawer.
+
+
+
+\subsection{Course Page (CourseTab)}
+\par\noindent This page appears on clicking on any course in the list on the dashboard. The layout of theis page is defined by the files, activity\_course\_tab.xml and content\_course\_tab.xml. It contains a TabLayout, comprising of the five fragments, listed as follows:
+\begin{itemize}
+\item \textbf{Overview} : It contains the brief information about the activities in the course in the past weeks.
+\item \textbf{Assignments} : This tab displays a list of the assignments corresponding to the particular course. Each item in the ListView expands on clicking, to show the title and deadline for the assignment. On clicking on the expanded view of the item,another activity, that displays the details of the assignment, opens up.
+\item \textbf{Grades} : It contains the list of grades of the student in the selected course. It is again an expandable list view, which on clicking, display the details of the particular examination of the course.
+\item \textbf{Threads} : This fragment contains the option of posting a new thread. Also, it displays a list(Custom ListView) of the previous threads posted regarding the course. Each item in the custom list view is clickable, and opens another activity, to display the description, and comments made on the selected thread.
+\item \textbf{Resources} : It simply displays the faculty name and a button to upload a private resource.
+\end{itemize}
+\par\noindent The following are the screen shots for the CourseTab page:
+% \begin{figure}
+% 	\centering
+%   \includegraphics[scale=0.75]{N5-Final.PNG}
+%   \caption{ Final Screen on Nexus 5(Portrait)}
+%   \label{n5final}
+% \end{figure}
+\subsection{Assign\_details Page}
+\par\noindent This page appears on clicking on the expanded list item of a particular assignment. It contains all the details, including description, deadline, late days, and past submissions of the assignment.
+It also contains a button to submit another file.
+
+\subsection{thread\_details Page}
+\par\noindent This page appears on clicking on a particular thread in the list of threads of a course in the CourseTab page. It contains the user name of the person who posted the thread, along with its description, time of creation and updation. Also, it displays the list of the comments made on the thread previously. The user also has an option of podting a new comment on the thread.
+
+
+
+
+\section{Implementation Details}
+\par\noindent The application structure is divided into two parts, one set of classes to handle the view of various fragments, and the other set forms the back-end and application flow.
+\subsection{Layout Handling}
+\par\noindent These classes are used to populate data in the fragments created in the CourseTab and the Tab\_view page.
+
+\subsubsection{CustomListAdapter}
+% \begin{itemize}
+\par\noindent This class has been made to implement a custom List View. It extends the BaseAdapter class, which basically handles the population of data into the items of the ListView. The description of its fields and methods(other than the auto generated methods) is as follows:
+
+\begin{lstlisting}[language=Java, caption={Fields \& Methods of CustomListAdapter}]
+class CustomListAdapter
+{
+	List<String> Titles;     // list of strings to populate title textbox
+	List<String> Times;	     // times of creation/latest update
+	List<Integer> Serial;    // serial numbers
+	Context context;	     // main application context
+	LayoutInflater inflater; // to inflate the listview item
+
+	public:
+	View getView(int,View,ViewGroup);
+	// populates comment_item layout, inflates view
+
+};
+\end{lstlisting}
+
+\subsubsection{CustomAdapter\_Thread}
+\par\noindent This class is similar to CustomListAdapter, but populates a different ListView item layout. It has three lists to populate different text views in the layout defined in the file customlistitem.xml.
+
+\subsubsection{Course\_Assignments}
+\par\noindent This is a fragment in the CourseTab page. It displays the list of assignments in the form of an Expandable List view. The adapter for the list view is set to an instance of the class, ExpandableListAdapter. 
+\par\noindent It stores a list for the headings and a hashmap for the two children(Title, time of creation of assignment int this case)of each list item.
+It has the following methods to populate the list view:
+\begin{itemize}
+\item \textit{prepareListData} : Takes as input two arrays, containing data corresponding to two children of each list item. Sets the list and hash map fields.
+\item \textit{onCreateView} : Receives the \textbf{Bundle} passed on from the CourseTab page and extracts the lists of data. Also, creates an instance of ExpandableListView class and sets OnGroupClickListener to expand/collapse the children.
+\item \textit{setOnChildClickListener} : Starts an \textbf{Intent} to navigate to Assign\_detail page of the clicked assignment ID.
+\end{itemize}
+
+\subsubsection{Course\_Threads}
+\par\noindent It is another fragment on the CourseTab page. It has the following methods:
+\begin{itemize}
+\item \textit{onCreateView} : Receives the \textbf{Bundle} sent by the CourseTab activity, and creates an instance of the CustomAdapter\_Thread class using the lists in the bundle. Implements the setOnItemClickListener() method of ListView to use an \textbf{Intent} to open the activity thread\_detail for the corresponding thread ID.
+
+\item \textit{Post\_thread} :  Handles the onClick event of the Post thread button. Uses \textbf{volley} to send a JsonObjectRequest to post the thread.
+\end{itemize}
+
+\subsubsection{Course\_Grades}
+\par\noindent This is another fragment in the CourseTab page. It displays the grades using an Expandable ListView.
+\subsubsection{Course\_Overview}
+\subsubsection{Course\_Resources}
+
+\subsubsection{OneFragment}
+\subsubsection{TwoFragment}
+\subsubsection{ThreeFragment}
+
+\subsection{BackEnd Classes}
+
+\subsubsection{MSplash Class}
+\par\noindent This class contains the various auto-generated methods to initialize an activity.
+\par\noindent A handler has been added to execute the method Run() of a runnable after the fixed time specified by a private variable, splash\_time.
+\par\noindent The Run() method creates a new Intent to start the main activity.
+
+% \subsection{AppGlobal Class}
+% \par\noindent This class~\cite{android_app_object} has been made to make an object of the application, so as to create a global request queue for the volley push requests. The same queue is used to add requests each time the user clicks the Register button on Main Page.
+
+\subsubsection{MyApp\_cookie}
+\par\noindent This class has been made to handle cookies. It also maintains a global list of course codes and id's.
+
+\subsubsection{LoginPage Class}
+\par\noindent The LoginPage class handles the dynamics and events of the main login page. The following methods have been included other than the standard methods:
+\begin{itemize}
+ \item \textbf{grow1} : 
+ \item \textbf{grow2} : 
+ \item \textbf{login} : 
+
+\end{itemize}
+
+\subsubsection{Tab\_view}
+\subsubsection{CourseTab}
+
+\subsubsection{Assign\_details}
+\subsubsection{thread\_Details}
+
+\subsubsection{ExpandableListAdapter}
+\par\noindent 
+
+
+% \begin{lstlisting}[language=C++, caption={Class Parameters for Test}]
+% class Test
+% {
+% 	private:
+% 		bool verbose;               //Variable if test is to be conducted
+% 		std::string description;    //String description of the test
+% 		bool isPass;                //Boolean if the test has passed 
+% 		void PrintPassFail(bool);   //Prints the status of the test
+% };
+% \end{lstlisting}
+
+
+
+% \section{Extra GUI Components}
+% \begin{itemize}
+% \item Adding a GUI interface for the user to pause and play the screen.
+% \item Adding GUI buttons for the user to select a particular ball and modify its speed.
+% \item Adding GUI buttons to add a ball to the screen or remove a ball after selecting it.
+% \end{itemize}
+\section{Error scenarios}
+\begin{itemize}
+\item \textbf{LoginPage} : If the user name and password are not correct, then a suitable error message is displayed.
+
+\item \textbf{}
+\end{itemize}
+
+
+\section{Future endeavours}
+\begin{itemize}
+\item Keep local cache of changes done, at mobile level and sync them with the global server as soon as internet connectivity is supplied.
+\item Decrease the time taken to receive data from the server and populate the view.
+\end{itemize}
+
+
+\section{Source Code}
+\par\noindent The source code of the project is maintained in the following repository:\\
+https://github.com/aditi741997/Moodle-ANA.git
+
+\bibliographystyle{abbrv}
+\medskip
+\bibliography{references}
+
+
+\end{document}

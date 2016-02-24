@@ -12,5 +12,4 @@
     tools:context="aditi.ayush.nikhil.project1.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-
 </RelativeLayout>

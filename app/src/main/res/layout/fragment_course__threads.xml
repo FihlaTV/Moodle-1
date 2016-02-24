@@ -48,14 +48,14 @@
         android:layout_marginTop="20dp"
         />
 
+
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:paddingLeft="6dp"
         android:paddingRight="6dp"
-        android:layout_below="@+id/post_comment"
-        android:id="@+id/ThreadsLV"
-        android:layout_marginTop="16dp">
+        android:layout_below="@+id/post_comment">
+
     </ListView>
 
 </RelativeLayout>

@@ -12,7 +12,8 @@
         android:textColor="#00688B"
         android:layout_weight="1.6"
         android:textSize="18dp"
-        android:text="SNo" />
+        android:text="SNo"
+ />
 
     <TextView
         android:layout_width="match_parent"
@@ -23,7 +24,8 @@
         android:textColor="#00688B"
         android:textSize="18dp"
         android:id="@+id/ATitle"
-        android:text="Title" />
+        android:text="Title"
+/>
 
     <TextView
         android:layout_width="match_parent"
