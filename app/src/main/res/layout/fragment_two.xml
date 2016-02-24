@@ -4,6 +4,7 @@
     android:fillViewport="true"
     android:scrollbars = "vertical"
     android:scrollbarStyle="insideOverlay"
+    android:background="@color/ListBackground"
     >
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

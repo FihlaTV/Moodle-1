@@ -52,6 +52,7 @@
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:id="@+id/commentList"
         android:paddingLeft="6dp"
         android:paddingRight="6dp"
         android:layout_below="@+id/post_comment">

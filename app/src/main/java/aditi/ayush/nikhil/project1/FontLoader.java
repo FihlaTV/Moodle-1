@@ -20,7 +20,11 @@ public enum FontLoader {
     COURIER("courier"),
     TAHOMA("tahoma"),
     LUCIDA("lucida"),
-    PACIFICO("Pacifico");
+    PACIFICO("Pacifico"),
+    DORIDROBOT("doridrobot"),
+    RECOGNITION("RECOGNITION"),
+    DROIDBOLD("DroidBold");
+
 
 
     private final String name;
