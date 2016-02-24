@@ -19,7 +19,7 @@
         android:id="@+id/res_fac"
         android:layout_below="@+id/fac"
         android:layout_marginTop="10dp"
-        android:text="blah"
+        android:text="Aditi change this 'blah"
         android:layout_alignLeft="@+id/fac"
         android:textSize="32dp"/>
 

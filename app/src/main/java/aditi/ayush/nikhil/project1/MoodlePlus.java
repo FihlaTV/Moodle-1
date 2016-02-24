@@ -1,6 +1,7 @@
 package aditi.ayush.nikhil.project1;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import android.os.Handler;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -36,6 +38,10 @@ public class MoodlePlus extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moodle_plus);
+
+        TextView myTextView = (TextView) findViewById(R.id.Text);
+        Typeface typeFace = FontLoader.getTypeFace(this, "Pacifico");
+        if (typeFace != null) myTextView.setTypeface(typeFace);
 
         new Handler().postDelayed(new Runnable() {
             @Override

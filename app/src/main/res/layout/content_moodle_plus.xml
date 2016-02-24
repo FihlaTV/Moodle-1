@@ -10,30 +10,40 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="aditi.ayush.nikhil.project1.MoodlePlus"
-    tools:showIn="@layout/activity_moodle_plus">
+    tools:showIn="@layout/activity_moodle_plus"
+    android:background="@drawable/background1">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Moodle-ANA"
+        android:text="Welcome to"
         android:id="@+id/Text"
-        android:layout_marginBottom="141dp"
+        android:layout_marginBottom="260dp"
         android:textStyle="bold|italic"
         android:textSize="32dp"
-        android:textColor="#bbbbbb"
+        android:textColor="@color/GroupBackground"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <ImageView
-        android:layout_width="280dp"
-        android:layout_height="200dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:id="@+id/imageView"
+
+        android:background="@drawable/iitlogo"
         android:layout_above="@+id/Text"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="33dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView3"
+        android:background="@drawable/logomoodle"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/iitlogo"/>
+        android:layout_marginTop="230dp"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
