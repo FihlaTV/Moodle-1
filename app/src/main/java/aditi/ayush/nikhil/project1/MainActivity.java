@@ -52,7 +52,8 @@ public class MainActivity extends AppCompatActivity
     ThreeFragment Three =new ThreeFragment();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {/** Oncreate method for Main Activity **/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void UpdateCourses()
-    {// to update the course list
+    {/** to update the course list **/
         final List<String> your_array_list = new ArrayList<String>();
         String url1="http://10.208.20.164:8000/courses/list.json";
         JsonObjectRequest json_ob = new JsonObjectRequest (Request.Method.GET, url1,null,
@@ -150,7 +151,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void UpdateNotif()
-    {// to update the notification fragment
+    {/** to update the notification fragment **/
         String url2="http://10.208.20.164:8000/default/notifications.json" ;
         final List<String> noti_text = new ArrayList<String>();
         final List<String> noti_time = new ArrayList<String>();
@@ -207,7 +208,8 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(ViewPager viewPager)
+    {/** Adding Fragments  to the Tab View **/
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(One, "Courses");
         adapter.addFragment(new TwoFragment(), "Grades");
@@ -215,7 +217,8 @@ public class MainActivity extends AppCompatActivity
         viewPager.setAdapter(adapter);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
+    class ViewPagerAdapter extends FragmentPagerAdapter
+    {/** A class to populate the Tab Views **/
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 

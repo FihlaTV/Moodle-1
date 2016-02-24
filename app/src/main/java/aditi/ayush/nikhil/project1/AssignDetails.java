@@ -36,7 +36,8 @@ public class AssignDetails extends AppCompatActivity
     public String description;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {/**  Oncreate method for Assignment Details**/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assign_details);
 

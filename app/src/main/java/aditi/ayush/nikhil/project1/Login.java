@@ -51,13 +51,11 @@ public class Login extends AppCompatActivity {
     public final JSON_parse J_object = new JSON_parse();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {   /** onCreate method for login page**/
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
-
-
         TextView myTextView = (TextView) findViewById(R.id.Login);
         Typeface typeFace = FontLoader.getTypeFace(this, "doridrobot");
         if (typeFace != null) myTextView.setTypeface(typeFace);
@@ -71,7 +69,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void login(View view) throws JSONException
-    {
+    {/** Button click handler for Login Button**/
         /** This method sends the details entered by the user to the server, and
          * validates it according to the response from the server.**/
         final EditText User = (EditText) findViewById(R.id.Username);

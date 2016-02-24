@@ -33,7 +33,8 @@ import java.util.List;
 
 
 
-public class TwoFragment extends Fragment{
+public class TwoFragment extends Fragment
+{/** A class for the Grades Tab **/
     ExpandableListAdapter listAdapter;
     public static  ExpandableListView expListView;
     public static List<String> listDataHeader;
@@ -54,7 +55,8 @@ public class TwoFragment extends Fragment{
 
 
     }
-    private void prepareListData() {
+    private void prepareListData()
+    {/** A method to populate the Expandable List view for the Grades Tab"**/
         final int[] no_assign = {0};
         final JSONArray grades=new JSONArray();
         listDataHeader = new ArrayList<String>();
@@ -133,7 +135,7 @@ public class TwoFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+/** Inflate the layout for grades tab **/
         View rootView = inflater.inflate(R.layout.fragment_two, null);
 
         expListView = (ExpandableListView) rootView.findViewById(R.id.lvExp);
