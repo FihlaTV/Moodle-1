@@ -33,7 +33,8 @@ import java.util.List;
 
 
 
-public class TwoFragment extends Fragment{
+public class TwoFragment extends Fragment
+{/** A class for the Grades Tab **/
     ExpandableListAdapter listAdapter;
     public static  ExpandableListView expListView;
     public static List<String> listDataHeader;
@@ -133,7 +134,7 @@ public class TwoFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+/** Inflate the layout for grades tab **/
         View rootView = inflater.inflate(R.layout.fragment_two, null);
 
         expListView = (ExpandableListView) rootView.findViewById(R.id.lvExp);

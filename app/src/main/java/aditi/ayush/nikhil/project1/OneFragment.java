@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 
 public class OneFragment extends Fragment {
-
+    /** A class for the fragment containing all courses **/
     MyApp_cookie app_list=new MyApp_cookie();
 
     public OneFragment() {
@@ -32,7 +32,7 @@ public class OneFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        /** Inflate the layout for the fragment containing all courses **/
 
         View myFragmentView = inflater.inflate(R.layout.fragment_one, container, false);
         Bundle bundle = this.getArguments();
@@ -69,8 +69,4 @@ public class OneFragment extends Fragment {
         return myFragmentView;
     }
 
-public void displayToast()
-{ Toast.makeText(getActivity().getBaseContext(), "Loading Course Page...It may take time",Toast.LENGTH_LONG).show();
-
-}
 }

@@ -38,6 +38,7 @@ public class ThreeFragment extends Fragment{
         View ret_view = inflater.inflate(R.layout.fragment_three, container, false);
         msg=(TextView) ret_view.findViewById(R.id.three);
         Bundle bundle = this.getArguments();
+
         //TextView contentView = (TextView)view.findViewById(R.id.contentPreview);
 //        String htmlEncodedString = Html.toHtml(contentText);
 //        String decodedString = StringEscapeUtils.unescapeHtml4(htmlEncodedString);
@@ -45,6 +46,8 @@ public class ThreeFragment extends Fragment{
         TextView notific=(TextView) ret_view.findViewById(R.id.three);
 
         ArrayList<String > noti_text =bundle.getStringArrayList("noti_text");
+
+        System.out.println(noti_text.size()+"fdafsdfasdfasfadsadsfasfasdfaf");
         ArrayList<String> noti_time = bundle.getStringArrayList("noti_time");
         ArrayList<String> noti_html=new ArrayList<String>();
         for(int i=0;i<noti_text.size();i++)

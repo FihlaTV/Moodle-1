@@ -84,7 +84,7 @@ public class CourseTab extends AppCompatActivity
         System.out.println("bundle setting");
         try
         {
-            Thread.sleep(1200);                 //1000 milliseconds is one second.
+            Thread.sleep(200);                 //1000 milliseconds is one second.
         }
         catch(InterruptedException ex)
         {
